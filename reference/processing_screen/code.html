@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "on-surface-variant": "#3c4947",
+                  "secondary": "#485f84",
+                  "surface-dim": "#d5dbd9",
+                  "on-error": "#ffffff",
+                  "on-primary-container": "#004c46",
+                  "on-primary": "#ffffff",
+                  "tertiary-container": "#ff9468",
+                  "outline": "#6c7a77",
+                  "on-primary-fixed": "#00201d",
+                  "inverse-primary": "#4fdbcc",
+                  "surface-container-highest": "#dde4e2",
+                  "surface-container": "#e9efed",
+                  "on-surface": "#161d1c",
+                  "on-secondary": "#ffffff",
+                  "tertiary-fixed-dim": "#ffb599",
+                  "surface": "#f4fbf8",
+                  "surface-tint": "#006a62",
+                  "inverse-surface": "#2b3230",
+                  "on-secondary-container": "#445a7f",
+                  "on-tertiary-fixed": "#370e00",
+                  "tertiary": "#9a4520",
+                  "surface-variant": "#dde4e2",
+                  "outline-variant": "#bbcac6",
+                  "primary": "#006a62",
+                  "surface-container-lowest": "#ffffff",
+                  "on-background": "#161d1c",
+                  "on-primary-fixed-variant": "#005049",
+                  "on-secondary-fixed": "#001b3c",
+                  "surface-bright": "#f4fbf8",
+                  "tertiary-fixed": "#ffdbce",
+                  "primary-container": "#2ec4b6",
+                  "error-container": "#ffdad6",
+                  "on-tertiary-fixed-variant": "#7b2f0a",
+                  "on-tertiary": "#ffffff",
+                  "error": "#ba1a1a",
+                  "primary-fixed": "#70f8e8",
+                  "surface-container-low": "#eff5f3",
+                  "inverse-on-surface": "#ecf2f0",
+                  "on-error-container": "#93000a",
+                  "surface-container-high": "#e3eae7",
+                  "secondary-fixed-dim": "#b0c7f1",
+                  "secondary-fixed": "#d5e3ff",
+                  "secondary-container": "#bbd3fd",
+                  "primary-fixed-dim": "#4fdbcc",
+                  "on-secondary-fixed-variant": "#30476a",
+                  "on-tertiary-container": "#762b06",
+                  "background": "#f4fbf8"
+          },
+          "borderRadius": {
+                  "DEFAULT": "1rem",
+                  "lg": "2rem",
+                  "xl": "3rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "xs": "4px",
+                  "xl": "32px",
+                  "lg": "24px",
+                  "base": "8px",
+                  "sm": "12px",
+                  "margin-mobile": "20px",
+                  "md": "16px",
+                  "gutter-mobile": "16px"
+          },
+          "fontFamily": {
+                  "display-lg": ["Nunito Sans"],
+                  "headline-sm": ["Nunito Sans"],
+                  "body-lg": ["Nunito Sans"],
+                  "label-md": ["Inter"],
+                  "label-sm": ["Inter"],
+                  "data-viz": ["Inter"],
+                  "headline-md": ["Nunito Sans"],
+                  "body-md": ["Nunito Sans"]
+          },
+          "fontSize": {
+                  "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                  "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                  "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                  "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                  "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                  "data-viz": ["14px", {"lineHeight": "18px", "fontWeight": "700"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #f4fbf8;
+    }
+    /* Abstract sensor wave simulation */
+    .wave-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 60px;
+    }
+    .wave-bar {
+      width: 4px;
+      background-color: #006a62;
+      border-radius: 2px;
+    }
+    @keyframes pulse-wave {
+      0%, 100% { height: 10px; opacity: 0.3; }
+      50% { height: 40px; opacity: 1; }
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md shadow-sm fixed top-0 w-full z-50 flex justify-between items-center px-margin-mobile h-16 transition-all duration-200">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant/30">
+<img alt="User" data-alt="A detailed closeup of a friendly user avatar placeholder within a medical wellness application. The lighting is soft and natural, emphasizing a professional yet approachable aesthetic. The background is a clean, slightly warm off-white, matching the overall modern health-tech interface style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCl8V4EMSiz6Thf6H7WehwuLc1j3OGBJipEKTCeBPMwc1ytiZusOmgAxUkgTvcy0wm01qq7FYIR8Pc3rNWhGThjsXuMMVsMfaUAtRSqa7e9EQpIfdXuFn62o3VgyMlaXe_1CksuuY1uTnnRW6FL63zduph3YUXjdVI2HshdG5K0XDsH9hVTl-5voAUDSAxc6BJHSS7u-xIee8BDMsqSGOFK37VpCOM7Uw7T9zRoT9BG5MuE5Oh2anK9qz7p7wYkElL_gpwrm8SIiaA"/>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Gait Analysis</h1>
+</div>
+<div class="flex items-center">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="sensors">sensors</span>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-grow pt-24 pb-32 px-margin-mobile max-w-md mx-auto w-full">
+<!-- Hero Illustration Section -->
+<section class="flex flex-col items-center text-center mb-xl">
+<div class="w-48 h-48 bg-surface-container-lowest rounded-full shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] flex items-center justify-center mb-lg relative overflow-hidden">
+<!-- Abstract Sensor Wave Animation (Static Representation) -->
+<div class="wave-container">
+<div class="wave-bar" style="height: 20px;"></div>
+<div class="wave-bar" style="height: 35px;"></div>
+<div class="wave-bar" style="height: 50px;"></div>
+<div class="wave-bar" style="height: 40px;"></div>
+<div class="wave-bar" style="height: 25px;"></div>
+<div class="wave-bar" style="height: 45px;"></div>
+<div class="wave-bar" style="height: 30px;"></div>
+</div>
+<!-- Center Icon -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-10">
+<span class="material-symbols-outlined text-8xl text-primary" data-icon="insights">insights</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Processing Your Gait Data</h2>
+<p class="font-body-md text-on-surface-variant max-w-[280px]">Please wait while we analyze your walking pattern.</p>
+</section>
+<!-- Stepper Progress Card -->
+<div class="bg-surface-container-lowest rounded-lg p-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] border border-outline-variant/10">
+<div class="flex flex-col gap-lg relative">
+<!-- Connecting Line -->
+<div class="absolute left-3.5 top-2 bottom-2 w-0.5 bg-outline-variant/30"></div>
+<!-- Step 1: Done -->
+<div class="flex items-start gap-md relative z-10">
+<div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[18px]" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Validating sensor data</span>
+<span class="font-label-sm text-label-sm text-primary">Completed</span>
+</div>
+</div>
+<!-- Step 2: Done -->
+<div class="flex items-start gap-md relative z-10">
+<div class="w-7 h-7 rounded-full bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-[18px]" data-icon="check" style="font-variation-settings: 'wght' 700;">check</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface">Calculating FreeAcc</span>
+<span class="font-label-sm text-label-sm text-primary">Completed</span>
+</div>
+</div>
+<!-- Step 3: Active -->
+<div class="flex items-start gap-md relative z-10">
+<div class="w-7 h-7 rounded-full bg-primary-container flex items-center justify-center border-2 border-primary animate-pulse">
+<div class="w-2 h-2 bg-primary rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-primary font-bold">Detecting gait events</span>
+<span class="font-label-sm text-label-sm text-primary-container-on">Processing...</span>
+</div>
+</div>
+<!-- Step 4: Pending -->
+<div class="flex items-start gap-md relative z-10">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant">
+<div class="w-1.5 h-1.5 bg-outline-variant rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Calculating semiogram</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/60">Waiting</span>
+</div>
+</div>
+<!-- Step 5: Pending -->
+<div class="flex items-start gap-md relative z-10">
+<div class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant">
+<div class="w-1.5 h-1.5 bg-outline-variant rounded-full"></div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface-variant">Predicting FMA-LE</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant/60">Waiting</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Microcopy Tip -->
+<div class="mt-xl text-center">
+<div class="inline-flex items-center gap-xs px-md py-sm bg-secondary-container/20 rounded-full">
+<span class="material-symbols-outlined text-secondary text-sm" data-icon="lightbulb">lightbulb</span>
+<span class="font-label-sm text-label-sm text-on-secondary-container">Tip: Keep your phone steady for better accuracy</span>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-safe px-4 bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 shadow-[0_-4px_20px_0_rgba(29,53,87,0.06)] z-50 rounded-t-lg">
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 px-4 py-1">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</div>
+<div class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-2xl px-4 py-1 transition-transform duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="fiber_manual_record" style="font-variation-settings: 'FILL' 1;">fiber_manual_record</span>
+<span class="font-label-sm text-label-sm">Record</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 px-4 py-1">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</div>
+<div class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 px-4 py-1">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</div>
+</nav>
+</body></html>

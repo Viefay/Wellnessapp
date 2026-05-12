@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Semiogram Details - Gait Analysis</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&amp;family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                "on-surface-variant": "#3c4947",
+                "secondary": "#485f84",
+                "surface-dim": "#d5dbd9",
+                "on-error": "#ffffff",
+                "on-primary-container": "#004c46",
+                "on-primary": "#ffffff",
+                "tertiary-container": "#ff9468",
+                "outline": "#6c7a77",
+                "on-primary-fixed": "#00201d",
+                "inverse-primary": "#4fdbcc",
+                "surface-container-highest": "#dde4e2",
+                "surface-container": "#e9efed",
+                "on-surface": "#161d1c",
+                "on-secondary": "#ffffff",
+                "tertiary-fixed-dim": "#ffb599",
+                "surface": "#f4fbf8",
+                "surface-tint": "#006a62",
+                "inverse-surface": "#2b3230",
+                "on-secondary-container": "#445a7f",
+                "on-tertiary-fixed": "#370e00",
+                "tertiary": "#9a4520",
+                "surface-variant": "#dde4e2",
+                "outline-variant": "#bbcac6",
+                "primary": "#006a62",
+                "surface-container-lowest": "#ffffff",
+                "on-background": "#161d1c",
+                "on-primary-fixed-variant": "#005049",
+                "on-secondary-fixed": "#001b3c",
+                "surface-bright": "#f4fbf8",
+                "tertiary-fixed": "#ffdbce",
+                "primary-container": "#2ec4b6",
+                "error-container": "#ffdad6",
+                "on-tertiary-fixed-variant": "#7b2f0a",
+                "on-tertiary": "#ffffff",
+                "error": "#ba1a1a",
+                "primary-fixed": "#70f8e8",
+                "surface-container-low": "#eff5f3",
+                "inverse-on-surface": "#ecf2f0",
+                "on-error-container": "#93000a",
+                "surface-container-high": "#e3eae7",
+                "secondary-fixed-dim": "#b0c7f1",
+                "secondary-fixed": "#d5e3ff",
+                "secondary-container": "#bbd3fd",
+                "primary-fixed-dim": "#4fdbcc",
+                "on-secondary-fixed-variant": "#30476a",
+                "on-tertiary-container": "#762b06",
+                "background": "#f4fbf8"
+            },
+            "borderRadius": {
+                "DEFAULT": "1rem",
+                "lg": "2rem",
+                "xl": "3rem",
+                "full": "9999px"
+            },
+            "spacing": {
+                "xs": "4px",
+                "xl": "32px",
+                "lg": "24px",
+                "base": "8px",
+                "sm": "12px",
+                "margin-mobile": "20px",
+                "md": "16px",
+                "gutter-mobile": "16px"
+            },
+            "fontFamily": {
+                "display-lg": ["Nunito Sans"],
+                "headline-sm": ["Nunito Sans"],
+                "body-lg": ["Nunito Sans"],
+                "label-md": ["Inter"],
+                "label-sm": ["Inter"],
+                "data-viz": ["Inter"],
+                "headline-md": ["Nunito Sans"],
+                "body-md": ["Nunito Sans"]
+            },
+            "fontSize": {
+                "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                "data-viz": ["14px", {"lineHeight": "18px", "fontWeight": "700"}],
+                "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .radar-grid {
+            stroke: #bbcac6;
+            stroke-width: 1;
+            fill: none;
+        }
+        .radar-area {
+            fill: rgba(46, 196, 182, 0.2);
+            stroke: #006a62;
+            stroke-width: 2.5;
+        }
+        .radar-point {
+            fill: #006a62;
+        }
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface font-body-md min-h-screen pb-32">
+<!-- Top AppBar -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm docked full-width top-0 sticky z-50 flex justify-between items-center px-margin-mobile h-16 w-full transition-all duration-200 active:scale-95">
+<div class="flex items-center gap-md">
+<button class="text-on-surface-variant hover:opacity-80 transition-all">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-primary dark:text-primary-fixed-dim">Semiogram Details</h1>
+</div>
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">sensors</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant border border-outline-variant overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional studio headshot of a middle-aged male doctor with a friendly expression. The background is a clean, minimalist clinical setting with soft natural light. The aesthetic is modern wellness, utilizing a cool white and soft teal color palette to convey trust and expertise." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDWvtM4ox25xSlolZT8jQcjXsG9wQ7Y2-SCRq6-GRRk2FmHauFmSc4ZE8gQ0yN1BV36ggIKkNQa8zboK2kac5QQiT7gbA9W7H0e6bkVJlZUoqjXKRLx4mzaDWc89Y1HSeoLTSW25SAKXLDBZh4ZohgHG0RsygQd25f8R8ACVV38SjknMOj6hC8LYk_ejesrHRR4GpPxArvReMcwOIStWePMC4HF80a93fZpUtvDyDrAB1Fe1dGVj-6z9uf_3tZktcNdaExkkbq-Gg"/>
+</div>
+</div>
+</header>
+<main class="px-margin-mobile pt-lg space-y-xl max-w-2xl mx-auto">
+<!-- Radar Chart Visual -->
+<section class="bg-surface-container-lowest rounded-lg p-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] relative overflow-hidden">
+<div class="flex justify-between items-start mb-lg">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Kinematic Balance</h2>
+<p class="font-body-md text-on-surface-variant">Last assessment: Oct 24, 2023</p>
+</div>
+<span class="bg-primary-container/20 text-on-primary-container px-sm py-xs rounded-full font-label-sm text-label-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-[14px]">check_circle</span> Complete
+                </span>
+</div>
+<!-- SVG Radar Chart Simulation -->
+<div class="w-full aspect-square relative flex items-center justify-center py-md">
+<svg class="w-full h-full max-w-[320px]" viewbox="0 0 400 400">
+<!-- Hexagonal Grid -->
+<polygon class="radar-grid" points="200,40 338,120 338,280 200,360 62,280 62,120"></polygon>
+<polygon class="radar-grid" points="200,80 305,140 305,260 200,320 95,260 95,140"></polygon>
+<polygon class="radar-grid" points="200,120 272,160 272,240 200,280 128,240 128,160"></polygon>
+<!-- Axes -->
+<line class="radar-grid" x1="200" x2="200" y1="40" y2="360"></line>
+<line class="radar-grid" x1="62" x2="338" y1="120" y2="280"></line>
+<line class="radar-grid" x1="62" x2="338" y1="280" y2="120"></line>
+<!-- Active Data Area -->
+<polygon class="radar-area" points="200,60 310,135 320,270 200,330 80,260 110,150"></polygon>
+<!-- Labels -->
+<text class="font-data-viz text-label-sm fill-on-surface-variant" text-anchor="middle" x="200" y="30">Speed</text>
+<text class="font-data-viz text-label-sm fill-on-surface-variant" text-anchor="start" x="350" y="120">Springiness</text>
+<text class="font-data-viz text-label-sm fill-on-surface-variant" text-anchor="start" x="350" y="290">Smoothness</text>
+<text class="font-data-viz text-label-sm fill-on-surface-variant" text-anchor="middle" x="200" y="385">Steadiness</text>
+<text class="font-data-viz text-label-sm fill-on-surface-variant" text-anchor="end" x="50" y="290">Sturdiness</text>
+<text class="font-data-viz text-label-sm fill-on-surface-variant" text-anchor="end" x="50" y="120">Stability</text>
+</svg>
+<!-- Center Floating Metric -->
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="bg-surface-container-lowest/80 backdrop-blur-sm rounded-full p-lg flex flex-col items-center shadow-lg border border-outline-variant/30">
+<span class="font-display-lg text-display-lg text-primary">82</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Index Score</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-md mt-lg">
+<div class="flex items-center gap-sm">
+<div class="w-3 h-3 rounded-full bg-primary"></div>
+<span class="font-label-md text-label-md text-on-surface">Current State</span>
+</div>
+<div class="flex items-center gap-sm">
+<div class="w-3 h-3 rounded-full border border-outline-variant bg-surface-container-highest"></div>
+<span class="font-label-md text-label-md text-on-surface-variant">Baseline</span>
+</div>
+</div>
+</section>
+<!-- Technical Parameters - Collapsible Sections -->
+<section class="space-y-md">
+<div class="flex items-center justify-between px-xs">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Parameter Metrics</h3>
+<span class="font-label-md text-label-md text-primary hover:underline cursor-pointer">Export CSV</span>
+</div>
+<!-- Metric Card 1: Velocity -->
+<details class="group bg-surface-container-lowest rounded-lg border border-outline-variant/30 overflow-hidden" open="">
+<summary class="flex items-center justify-between p-md cursor-pointer list-none hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<div class="p-base bg-secondary-container rounded-lg">
+<span class="material-symbols-outlined text-on-secondary-container">speed</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Velocity &amp; Cadence</span>
+</div>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-md grid grid-cols-1 md:grid-cols-2 gap-md border-t border-outline-variant/20">
+<div class="bg-surface-container-low p-md rounded-md">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-xs">Average Speed (V)</p>
+<p class="font-display-lg text-headline-md text-primary">0.82 <span class="text-label-md font-normal">m/s</span></p>
+</div>
+<div class="bg-surface-container-low p-md rounded-md">
+<p class="font-label-sm text-label-sm text-on-surface-variant uppercase mb-xs">Cadence</p>
+<p class="font-display-lg text-headline-md text-primary">102 <span class="text-label-md font-normal">steps/min</span></p>
+</div>
+</div>
+</details>
+<!-- Metric Card 2: Dynamic Factors -->
+<details class="group bg-surface-container-lowest rounded-lg border border-outline-variant/30 overflow-hidden">
+<summary class="flex items-center justify-between p-md cursor-pointer list-none hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<div class="p-base bg-tertiary-container rounded-lg">
+<span class="material-symbols-outlined text-on-tertiary-container">waves</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Dynamic Factors</span>
+</div>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-md space-y-sm border-t border-outline-variant/20">
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-md">
+<span class="font-body-md text-on-surface">Springiness (StrT)</span>
+<span class="font-data-viz text-data-viz text-primary">0.61 s</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-md">
+<span class="font-body-md text-on-surface">Smoothness (LDLJ)</span>
+<span class="font-data-viz text-data-viz text-error">-2.15</span>
+</div>
+<div class="flex justify-between items-center p-sm bg-surface-container-low rounded-md">
+<span class="font-body-md text-on-surface">Symmetry (SymI)</span>
+<span class="font-data-viz text-data-viz text-primary">94.2%</span>
+</div>
+</div>
+</details>
+<!-- Metric Card 3: Foot Placement -->
+<details class="group bg-surface-container-lowest rounded-lg border border-outline-variant/30 overflow-hidden">
+<summary class="flex items-center justify-between p-md cursor-pointer list-none hover:bg-surface-container-low transition-colors">
+<div class="flex items-center gap-md">
+<div class="p-base bg-primary-container rounded-lg">
+<span class="material-symbols-outlined text-on-primary-container">directions_walk</span>
+</div>
+<span class="font-headline-sm text-headline-sm text-on-surface">Stance &amp; Swing</span>
+</div>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180">expand_more</span>
+</summary>
+<div class="p-md border-t border-outline-variant/20">
+<div class="flex gap-md mb-md">
+<div class="flex-1 bg-surface-container-low p-md rounded-md text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Left Stance</p>
+<p class="font-headline-md text-headline-md text-secondary">62.1%</p>
+</div>
+<div class="flex-1 bg-surface-container-low p-md rounded-md text-center">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Right Stance</p>
+<p class="font-headline-md text-headline-md text-secondary">61.8%</p>
+</div>
+</div>
+<div class="w-full bg-outline-variant/20 h-2 rounded-full overflow-hidden flex">
+<div class="h-full bg-primary" style="width: 50.5%"></div>
+<div class="h-full bg-secondary" style="width: 49.5%"></div>
+</div>
+<p class="font-label-sm text-label-sm text-on-surface-variant text-center mt-xs">Weight Distribution Balance</p>
+</div>
+</details>
+</section>
+<!-- Insights Summary -->
+<section class="bg-primary/5 rounded-lg p-lg border border-primary/10">
+<div class="flex items-center gap-sm mb-md">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<h4 class="font-headline-sm text-headline-sm text-primary">Clinical Insights</h4>
+</div>
+<p class="font-body-md text-on-surface mb-md">
+                Your gait exhibits a slight asymmetry in the <span class="font-bold">terminal stance</span> phase. Smoothness (LDLJ) is currently below the target range, suggesting minor hesitations in weight transfer.
+            </p>
+<div class="flex items-center gap-md">
+<button class="flex-1 bg-primary text-on-primary font-label-md py-sm rounded-full shadow-md transition-all active:scale-95">View Therapy Plan</button>
+<button class="flex-1 bg-surface-container-lowest text-primary border border-primary font-label-md py-sm rounded-full transition-all active:scale-95">Compare Past</button>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 glass-nav bg-surface/90 dark:bg-inverse-surface/90 pt-2 pb-safe px-4 flex justify-around items-center border-t border-outline-variant/30 shadow-[0_-4px_20px_0_rgba(29,53,87,0.06)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">fiber_manual_record</span>
+<span class="font-label-sm text-label-sm">Record</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-2xl px-4 py-1 transition-transform duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-all p-2 rounded-xl" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+<!-- FAB (Suppressed as per rules for Detail screens, but included if needed for primary action) -->
+<!-- The prompt mandates a Semiogram Detail Screen. FABs are suppressed on Detail screens. -->
+</body></html>

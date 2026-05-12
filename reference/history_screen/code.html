@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #f4fbf8;
+        }
+        .glass-nav {
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#3c4947",
+                        "secondary": "#485f84",
+                        "surface-dim": "#d5dbd9",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#004c46",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#ff9468",
+                        "outline": "#6c7a77",
+                        "on-primary-fixed": "#00201d",
+                        "inverse-primary": "#4fdbcc",
+                        "surface-container-highest": "#dde4e2",
+                        "surface-container": "#e9efed",
+                        "on-surface": "#161d1c",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "surface": "#f4fbf8",
+                        "surface-tint": "#006a62",
+                        "inverse-surface": "#2b3230",
+                        "on-secondary-container": "#445a7f",
+                        "on-tertiary-fixed": "#370e00",
+                        "tertiary": "#9a4520",
+                        "surface-variant": "#dde4e2",
+                        "outline-variant": "#bbcac6",
+                        "primary": "#006a62",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#161d1c",
+                        "on-primary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#001b3c",
+                        "surface-bright": "#f4fbf8",
+                        "tertiary-fixed": "#ffdbce",
+                        "primary-container": "#2ec4b6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#7b2f0a",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#70f8e8",
+                        "surface-container-low": "#eff5f3",
+                        "inverse-on-surface": "#ecf2f0",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e3eae7",
+                        "secondary-fixed-dim": "#b0c7f1",
+                        "secondary-fixed": "#d5e3ff",
+                        "secondary-container": "#bbd3fd",
+                        "primary-fixed-dim": "#4fdbcc",
+                        "on-secondary-fixed-variant": "#30476a",
+                        "on-tertiary-container": "#762b06",
+                        "background": "#f4fbf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "md": "16px",
+                        "gutter-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Nunito Sans"],
+                        "headline-sm": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "data-viz": ["Inter"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "data-viz": ["14px", {"lineHeight": "18px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen pb-24">
+<!-- Top App Bar (Mapped from JSON) -->
+<header class="bg-surface/80 dark:bg-surface-dim/80 backdrop-blur-md shadow-sm fixed top-0 w-full z-40 h-16 flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A professional medical headshot of a person with a warm and supportive expression, set against a clean and minimalist clinic background. The lighting is soft and even, highlighting a high-end wellness atmosphere. The color palette features gentle teals and soft whites to match the modern movement assessment app aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCcdfnt_vKGsRGvDzR419WfVXmPUwtdxPfw0Fv-PDysLgYqczcG4alftN12w443rd55i9Hpx322ScAWc5wJATstoldQ_JixhAQEf_m_2zcnG923Uq6KZFpwxXS0Xdnm1p_mL-oUPR765d29nx6fSSW77nR7CIPLVbO6CcbNL9yIvnHkQ6skxpR9XL6kFXB0ymdVK6UCCfZ--Q_IWChmrGXj1Bpe09PIaekz2eatvf8gbPURCwWkDDhnSDvNt5AYHF_rAOEk1YxU-L8"/>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Test History</h1>
+</div>
+<button class="text-primary hover:opacity-80 transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+</header>
+<main class="mt-20 px-margin-mobile">
+<!-- Search & Filter Controls -->
+<div class="flex flex-col gap-md mb-xl">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-surface-container-lowest border border-outline-variant/30 rounded-xl font-body-md focus:outline-none focus:ring-2 focus:ring-primary-container transition-all" placeholder="Search sessions..." type="text"/>
+</div>
+<div class="flex gap-sm">
+<button class="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-surface-container-high rounded-full font-label-md text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">calendar_today</span>
+                    Date
+                </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-2 px-4 bg-surface-container-high rounded-full font-label-md text-on-surface-variant hover:bg-surface-variant transition-colors">
+<span class="material-symbols-outlined text-[20px]">tune</span>
+                    Severity
+                </button>
+</div>
+</div>
+<!-- Session List -->
+<div class="flex flex-col gap-lg">
+<!-- Session Card 1 -->
+<div class="bg-surface-container-lowest p-md rounded-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] flex flex-col gap-md border border-outline-variant/10">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Gait Test - 12 March 2026</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Classification: CVA</span>
+</div>
+<span class="bg-tertiary-container/20 text-on-tertiary-container px-3 py-1 rounded-full font-label-sm">Moderate</span>
+</div>
+<div class="grid grid-cols-2 gap-md bg-surface-container-low p-sm rounded-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">FMA-LE Score</span>
+<span class="font-display-lg text-display-lg text-primary">24</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">Symmetry</span>
+<span class="font-display-lg text-display-lg text-secondary">82%</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary rounded-full font-label-md hover:opacity-90 active:scale-[0.98] transition-all">
+                    View Details
+                </button>
+</div>
+<!-- Session Card 2 -->
+<div class="bg-surface-container-lowest p-md rounded-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] flex flex-col gap-md border border-outline-variant/10">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Gait Test - 05 March 2026</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Classification: Post-Op Recovery</span>
+</div>
+<span class="bg-primary-container/20 text-on-primary-container px-3 py-1 rounded-full font-label-sm">Mild</span>
+</div>
+<div class="grid grid-cols-2 gap-md bg-surface-container-low p-sm rounded-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">FMA-LE Score</span>
+<span class="font-display-lg text-display-lg text-primary">29</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">Symmetry</span>
+<span class="font-display-lg text-display-lg text-secondary">91%</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary rounded-full font-label-md hover:opacity-90 active:scale-[0.98] transition-all">
+                    View Details
+                </button>
+</div>
+<!-- Session Card 3 -->
+<div class="bg-surface-container-lowest p-md rounded-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] flex flex-col gap-md border border-outline-variant/10 opacity-70">
+<div class="flex justify-between items-start">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-surface">Gait Test - 28 Feb 2026</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">Classification: Initial Assessment</span>
+</div>
+<span class="bg-error-container/20 text-on-error-container px-3 py-1 rounded-full font-label-sm">Severe</span>
+</div>
+<div class="grid grid-cols-2 gap-md bg-surface-container-low p-sm rounded-md">
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">FMA-LE Score</span>
+<span class="font-display-lg text-display-lg text-primary">12</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-sm text-on-surface-variant">Symmetry</span>
+<span class="font-display-lg text-display-lg text-secondary">64%</span>
+</div>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary rounded-full font-label-md hover:opacity-90 active:scale-[0.98] transition-all">
+                    View Details
+                </button>
+</div>
+<!-- Empty State Trigger -->
+<div class="flex flex-col items-center justify-center py-xl gap-md text-center">
+<div class="w-16 h-16 bg-surface-container-high rounded-full flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-[32px]">history</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-on-surface">Need more data?</h3>
+<p class="font-body-md text-on-surface-variant px-lg">Keep track of your recovery progress with frequent movement assessments.</p>
+</div>
+<button class="px-xl py-3 bg-secondary text-on-secondary rounded-full font-label-md shadow-lg shadow-secondary/20 hover:scale-105 active:scale-95 transition-all">
+                    Start New Test
+                </button>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Mapped from JSON) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-safe px-4 bg-surface/90 dark:bg-inverse-surface/90 backdrop-blur-md border-t border-outline-variant/30 shadow-[0_-4px_20px_0_rgba(29,53,87,0.06)] z-50 rounded-t-lg">
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90">
+<span class="material-symbols-outlined">fiber_manual_record</span>
+<span class="font-label-sm text-label-sm">Record</span>
+</button>
+<!-- Active State: History -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-2xl px-4 py-1 transition-transform duration-300 active:scale-90">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</nav>
+</body></html>

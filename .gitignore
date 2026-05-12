@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# Vite / frontend build output
+.vite/
+dist/
+build/
+
+# Flutter / Dart generated files
+.dart_tool/
+.packages
+pubspec.lock
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# Misc
+.DS_Store
