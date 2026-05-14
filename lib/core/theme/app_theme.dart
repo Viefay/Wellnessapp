@@ -67,12 +67,12 @@ abstract final class AppTheme {
           scrolledUnderElevation: 0,
           surfaceTintColor: Colors.transparent,
         ),
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: AppColors.surfaceContainerLowest,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: radiusDefault,
-            side: const BorderSide(
+            side: BorderSide(
               color: Color(0x1ABFC9C4),
               width: 1,
             ),
