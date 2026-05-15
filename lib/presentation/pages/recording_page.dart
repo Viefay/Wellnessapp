@@ -23,7 +23,10 @@ class _BackAppBar extends StatelessWidget {
       child: Row(
         children: [
           GestureDetector(
-            onTap: () => context.go(AppRoutes.footSelection),
+            onTap: () {
+              context.read<RecordingProvider>().cancelRecording();
+              context.go(AppRoutes.footSelection);
+            },
             child: Container(
               width: 40,
               height: 40,
@@ -64,25 +67,49 @@ class RecordingPage extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: AppTheme.lg),
-                  // Circular timer
+                  // Circular timer (counts up while recording)
                   _TimerRing(
-                    remainingSeconds: provider.remainingSeconds,
-                    totalSeconds: 30,
+                    elapsedSeconds: provider.elapsedSeconds,
+                    recommendedSeconds:
+                        RecordingProvider.recommendedSeconds,
                     isRecording: provider.isRecording,
                   ),
                   const SizedBox(height: AppTheme.xl),
                   // Sensor status grid
-                  _SensorStatusGrid(),
+                  _SensorStatusGrid(samplingRateHz: provider.samplingRateHz),
                   const SizedBox(height: AppTheme.xl),
-                  // Stop / Start button
-                  if (provider.isRecording)
+                  // Recording controls
+                  if (provider.isRecording) ...[
                     _PulseButton(
                       onTap: () {
-                        provider.stopRecording();
+                        provider.finishRecording();
                         context.go(AppRoutes.processing);
                       },
-                    )
-                  else
+                    ),
+                    const SizedBox(height: AppTheme.lg),
+                    GestureDetector(
+                      onTap: () {
+                        provider.cancelRecording();
+                        context.go(AppRoutes.footSelection);
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding:
+                            const EdgeInsets.symmetric(vertical: 14),
+                        decoration: BoxDecoration(
+                          borderRadius: AppTheme.radiusFull,
+                          border: Border.all(
+                              color: AppColors.error, width: 1.5),
+                        ),
+                        child: Text(
+                          'Cancel',
+                          style: AppText.labelMd
+                              .copyWith(color: AppColors.error),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                  ] else
                     GestureDetector(
                       onTap: () => provider.startRecording(),
                       child: Container(
@@ -141,25 +168,26 @@ class RecordingPage extends StatelessWidget {
 }
 
 class _TimerRing extends StatelessWidget {
-  final int remainingSeconds;
-  final int totalSeconds;
+  final int elapsedSeconds;
+  final int recommendedSeconds;
   final bool isRecording;
 
   const _TimerRing({
-    required this.remainingSeconds,
-    required this.totalSeconds,
+    required this.elapsedSeconds,
+    required this.recommendedSeconds,
     required this.isRecording,
   });
 
   String get _timeLabel {
-    final mins = remainingSeconds ~/ 60;
-    final secs = remainingSeconds % 60;
+    final mins = elapsedSeconds ~/ 60;
+    final secs = elapsedSeconds % 60;
     return '${mins.toString().padLeft(2, '0')}:${secs.toString().padLeft(2, '0')}';
   }
 
   @override
   Widget build(BuildContext context) {
-    final progress = remainingSeconds / totalSeconds;
+    final progress =
+        (elapsedSeconds / recommendedSeconds).clamp(0.0, 1.0);
 
     return SizedBox(
       width: 264,
@@ -190,6 +218,14 @@ class _TimerRing extends StatelessWidget {
                 style: AppText.labelSm,
               ),
               if (isRecording) ...[
+                const SizedBox(height: 2),
+                Text(
+                  elapsedSeconds < recommendedSeconds
+                      ? 'Keep walking · ${recommendedSeconds}s+ recommended'
+                      : 'You can finish anytime',
+                  style: AppText.labelSm.copyWith(
+                      color: AppColors.onSurfaceVariant),
+                ),
                 const SizedBox(height: 8),
                 Row(
                   mainAxisSize: MainAxisSize.min,
@@ -257,6 +293,9 @@ class _RingPainter extends CustomPainter {
 }
 
 class _SensorStatusGrid extends StatelessWidget {
+  final int samplingRateHz;
+  const _SensorStatusGrid({required this.samplingRateHz});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -283,7 +322,7 @@ class _SensorStatusGrid extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppTheme.sm),
-          _SamplingRateItem(),
+          _SamplingRateItem(samplingRateHz: samplingRateHz),
         ],
       ),
     );
@@ -324,6 +363,9 @@ class _SensorItem extends StatelessWidget {
 }
 
 class _SamplingRateItem extends StatelessWidget {
+  final int samplingRateHz;
+  const _SamplingRateItem({required this.samplingRateHz});
+
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -332,7 +374,7 @@ class _SamplingRateItem extends StatelessWidget {
         Text('Sampling Rate', style: AppText.labelSm),
         Row(
           children: [
-            Text('120 Hz',
+            Text('$samplingRateHz Hz',
                 style: AppText.dataViz
                     .copyWith(color: AppColors.primary)),
             const SizedBox(width: 8),
@@ -394,7 +436,7 @@ class _PulseButtonState extends State<_PulseButton>
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('Tap to stop recording',
+        Text('Tap to finish recording',
             style: AppText.labelSm),
         const SizedBox(height: AppTheme.md),
         AnimatedBuilder(

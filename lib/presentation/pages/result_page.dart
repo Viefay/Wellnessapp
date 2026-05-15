@@ -8,7 +8,10 @@ import '../../core/constants/app_text_styles.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/dummy_data.dart';
 import '../../data/models/gait_result.dart';
+import '../../data/services/export_service.dart';
 import '../providers/session_provider.dart';
+import '../providers/profile_provider.dart';
+import '../providers/recording_provider.dart';
 import '../widgets/app_card.dart';
 import '../widgets/bottom_nav_shell.dart';
 class ResultPage extends StatelessWidget {
@@ -52,9 +55,6 @@ class ResultPage extends StatelessWidget {
                   // Classification card
                   _ClassificationCard(result: result),
                   const SizedBox(height: AppTheme.md),
-                  // Gait events card
-                  _GaitEventsCard(result: result),
-                  const SizedBox(height: AppTheme.md),
                   // Radar chart card
                   _RadarChartCard(result: result),
                   const SizedBox(height: AppTheme.xl),
@@ -79,26 +79,45 @@ class ResultPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: AppTheme.sm),
+                  _OutlineBtn(
+                    label: 'Save Result to History',
+                    icon: Icons.save_outlined,
+                    onTap: () async {
+                      final messenger = ScaffoldMessenger.of(context);
+                      final timeseries = context
+                          .read<RecordingProvider>()
+                          .recordedData;
+                      final profile =
+                          context.read<ProfileProvider>().profile;
+                      await provider.saveSession(
+                        timeseries: timeseries,
+                        profile: profile,
+                      );
+                      if (!context.mounted) return;
+                      messenger.showSnackBar(
+                        SnackBar(
+                            content: Text(provider.lastNotice ??
+                                'Result saved to history')),
+                      );
+                      context.go(AppRoutes.home);
+                    },
+                  ),
+                  const SizedBox(height: AppTheme.sm),
                   Row(
                     children: [
                       Expanded(
                         child: _OutlineBtn(
-                          label: 'Save Result',
-                          icon: Icons.save_outlined,
-                          onTap: () async {
-                            await provider.saveSession();
-                            if (context.mounted) {
-                              context.go(AppRoutes.home);
-                            }
-                          },
+                          label: 'Export CSV',
+                          icon: Icons.table_chart_outlined,
+                          onTap: () => _exportCsv(context),
                         ),
                       ),
                       const SizedBox(width: AppTheme.sm),
                       Expanded(
                         child: _OutlineBtn(
-                          label: 'Export Report',
-                          icon: Icons.ios_share,
-                          onTap: () {},
+                          label: 'Export PDF',
+                          icon: Icons.picture_as_pdf_outlined,
+                          onTap: () => _exportPdf(context, result),
                         ),
                       ),
                     ],
@@ -112,6 +131,34 @@ class ResultPage extends StatelessWidget {
       ),
       bottomNavigationBar: const BottomNavBar(activePage: 'record'),
     );
+  }
+
+  Future<void> _exportCsv(BuildContext context) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final data = context.read<RecordingProvider>().recordedData;
+    if (data.isEmpty) {
+      messenger.showSnackBar(const SnackBar(
+          content: Text('No time series available for this result')));
+      return;
+    }
+    try {
+      await ExportService().shareTimeseriesCsv(data);
+    } catch (e) {
+      messenger.showSnackBar(
+          SnackBar(content: Text('CSV export failed: $e')));
+    }
+  }
+
+  Future<void> _exportPdf(BuildContext context, GaitResult result) async {
+    final messenger = ScaffoldMessenger.of(context);
+    final profile = context.read<ProfileProvider>().profile;
+    try {
+      await ExportService().shareReportPdf(
+          result: result, profile: profile);
+    } catch (e) {
+      messenger.showSnackBar(
+          SnackBar(content: Text('PDF export failed: $e')));
+    }
   }
 }
 
@@ -272,77 +319,6 @@ class _ClassificationCard extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class _GaitEventsCard extends StatelessWidget {
-  final GaitResult result;
-  const _GaitEventsCard({required this.result});
-
-  @override
-  Widget build(BuildContext context) {
-    return AppCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Gait Events', style: AppText.labelMd),
-          const SizedBox(height: AppTheme.md),
-          _EventRow(
-            label: 'Heel Strike',
-            count: result.heelStrikeCount,
-            max: 40,
-            color: AppColors.primary,
-          ),
-          const SizedBox(height: AppTheme.sm),
-          _EventRow(
-            label: 'Toe Off',
-            count: result.toeOffCount,
-            max: 40,
-            color: AppColors.secondary,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _EventRow extends StatelessWidget {
-  final String label;
-  final int count;
-  final int max;
-  final Color color;
-
-  const _EventRow({
-    required this.label,
-    required this.count,
-    required this.max,
-    required this.color,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(label, style: AppText.labelSm),
-            Text(count.toString(), style: AppText.dataViz),
-          ],
-        ),
-        const SizedBox(height: 4),
-        ClipRRect(
-          borderRadius: AppTheme.radiusFull,
-          child: LinearProgressIndicator(
-            value: count / max,
-            minHeight: 8,
-            backgroundColor: AppColors.surfaceContainerHighest,
-            valueColor: AlwaysStoppedAnimation<Color>(color),
-          ),
-        ),
-      ],
     );
   }
 }

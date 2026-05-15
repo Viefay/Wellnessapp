@@ -5,8 +5,8 @@ import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_routes.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/theme/app_theme.dart';
-import '../../core/utils/dummy_data.dart';
 import '../providers/session_provider.dart';
+import '../providers/profile_provider.dart';
 import '../widgets/app_card.dart';
 import '../widgets/bottom_nav_shell.dart';
 import '../widgets/custom_app_bar.dart';
@@ -17,6 +17,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sessions = context.watch<SessionProvider>().history;
+    final profile = context.watch<ProfileProvider>().profile;
+    final displayName =
+        profile.name.trim().isEmpty ? 'there' : profile.name.trim();
 
     return Scaffold(
       extendBodyBehindAppBar: true,
@@ -44,7 +47,7 @@ class HomePage extends StatelessWidget {
                 Text('Hello, welcome back',
                     style: AppText.bodySm),
                 const SizedBox(height: 4),
-                Text('John Doe', style: AppText.headlineSm),
+                Text(displayName, style: AppText.headlineSm),
                 const SizedBox(height: AppTheme.lg),
                 // Hero card
                 _HeroCard(onStartTest: () => context.go(AppRoutes.instruction)),
@@ -169,6 +172,9 @@ class _HeroCard extends StatelessWidget {
 class _StatsGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final history = context.watch<SessionProvider>().history;
+    final latest = history.isNotEmpty ? history.first : null;
+
     return Column(
       children: [
         // FMA-LE card (full width)
@@ -182,7 +188,10 @@ class _StatsGrid extends StatelessWidget {
                     Text('FMA-LE Score',
                         style: AppText.labelSm),
                     const SizedBox(height: 4),
-                    Text('24',
+                    Text(
+                        latest != null
+                            ? latest.result.fmaLeScore.toString()
+                            : '—',
                         style: AppText.dataLg
                             .copyWith(color: AppColors.primary)),
                     Text('out of 34',
@@ -190,7 +199,8 @@ class _StatsGrid extends StatelessWidget {
                   ],
                 ),
               ),
-              _SeverityBadge(severity: 'Moderate'),
+              if (latest != null)
+                _SeverityBadge(severity: latest.severity),
             ],
           ),
         ),
@@ -206,11 +216,14 @@ class _StatsGrid extends StatelessWidget {
                     Text('Classification',
                         style: AppText.labelSm),
                     const SizedBox(height: 4),
-                    Text('CVA',
+                    Text(latest != null ? latest.classification : '—',
                         style: AppText.headlineSm
                             .copyWith(color: AppColors.primary)),
                     const SizedBox(height: 4),
-                    Text('91% confidence',
+                    Text(
+                        latest != null
+                            ? '${(latest.result.confidence * 100).round()}% confidence'
+                            : 'No tests yet',
                         style: AppText.labelSm
                             .copyWith(color: AppColors.success)),
                   ],
@@ -226,7 +239,7 @@ class _StatsGrid extends StatelessWidget {
                   children: [
                     Text('Sessions', style: AppText.labelSm),
                     const SizedBox(height: 4),
-                    Text(dummySessions.length.toString(),
+                    Text(history.length.toString(),
                         style: AppText.headlineSm
                             .copyWith(color: AppColors.secondary)),
                     const SizedBox(height: 4),

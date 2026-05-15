@@ -1,8 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:label="wellness"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/ic_launcher"
+        android:usesCleartextTraffic="true">
+        <!-- usesCleartextTraffic: dev gait-analysis Flask API is plain HTTP
+             on the LAN / emulator (http://10.0.2.2:5000). Use HTTPS or a
+             scoped network-security-config for production. -->
+
         <activity
             android:name=".MainActivity"
             android:exported="true"

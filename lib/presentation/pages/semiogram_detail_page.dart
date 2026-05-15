@@ -8,6 +8,7 @@ import '../../core/constants/app_text_styles.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/dummy_data.dart';
 import '../../data/models/semiogram_result.dart';
+import '../../data/models/semiogram_reference.dart';
 import '../providers/session_provider.dart';
 import '../widgets/app_card.dart';
 import '../widgets/bottom_nav_shell.dart';
@@ -20,6 +21,13 @@ class SemiogramDetailPage extends StatelessWidget {
     final provider = context.watch<SessionProvider>();
     final result = provider.currentResult ?? dummyResult;
     final s = result.semiogram;
+
+    final scores = buildSemiogramScores(s);
+    // Preserve reference order while grouping by criteria.
+    final groups = <String, List<SemiogramScore>>{};
+    for (final score in scores) {
+      groups.putIfAbsent(score.param.criteria, () => []).add(score);
+    }
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -66,10 +74,8 @@ class SemiogramDetailPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: AppTheme.sm),
-                        // Legend
                         Row(
-                          mainAxisAlignment:
-                              MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             _LegendDot(
                                 color: AppColors.primary,
@@ -84,117 +90,27 @@ class SemiogramDetailPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: AppTheme.md),
-                  // Parameter sections
-                  _CollapsibleSection(
-                    title: 'Velocity & Cadence',
-                    icon: Icons.speed,
+                  // Full semiogram parameter table (from journal)
+                  Row(
                     children: [
-                      _ParamRow(
-                          label: 'Avg Speed (V)',
-                          value: '${s.v.toStringAsFixed(2)} m/s'),
-                      _ParamRow(
-                          label: 'Cadence',
-                          value: '${s.cadence.round()} steps/min'),
-                      _ParamRow(
-                          label: 'Step Length (L)',
-                          value:
-                              '${s.stepLengthLeft.toStringAsFixed(2)} m'),
-                      _ParamRow(
-                          label: 'Step Length (R)',
-                          value:
-                              '${s.stepLengthRight.toStringAsFixed(2)} m'),
+                      Text('Semiogram Parameters',
+                          style: AppText.headlineSm),
+                      const SizedBox(width: 6),
+                      Text('(reference: journal)',
+                          style: AppText.labelSm.copyWith(
+                              color: AppColors.onSurfaceVariant)),
                     ],
                   ),
                   const SizedBox(height: AppTheme.sm),
-                  _CollapsibleSection(
-                    title: 'Dynamic Factors',
-                    icon: Icons.analytics_outlined,
-                    children: [
-                      _ParamRow(
-                          label: 'Springiness',
-                          value: s.strT.toStringAsFixed(3)),
-                      _ParamRow(
-                          label: 'Smoothness',
-                          value: s.ldlja.toStringAsFixed(3)),
-                      _ParamRow(
-                          label: 'SPARC (Rot)',
-                          value: s.sparcrot.toStringAsFixed(3)),
-                      _ParamRow(
-                          label: 'SPARC (Tra)',
-                          value: s.sparctra.toStringAsFixed(3)),
-                      _ParamRow(
-                          label: 'SPARC (Ver)',
-                          value: s.sparcver.toStringAsFixed(3)),
-                    ],
-                  ),
+                  for (final entry in groups.entries) ...[
+                    _CriteriaTable(
+                      criteria: entry.key,
+                      scores: entry.value,
+                    ),
+                    const SizedBox(height: AppTheme.sm),
+                  ],
                   const SizedBox(height: AppTheme.sm),
-                  _CollapsibleSection(
-                    title: 'Stance & Swing',
-                    icon: Icons.swap_horiz,
-                    children: [
-                      _ParamRow(
-                          label: 'Stance Phase (L)',
-                          value: '${s.stanceLeft.toStringAsFixed(1)}%'),
-                      _ParamRow(
-                          label: 'Stance Phase (R)',
-                          value:
-                              '${s.stanceRight.toStringAsFixed(1)}%'),
-                      _ParamRow(
-                          label: 'Symmetry Index',
-                          value: s.symmetryIndex.toStringAsFixed(3)),
-                      _ParamRow(
-                          label: 'CV Stride Time',
-                          value: s.cvStrideTime.toStringAsFixed(3)),
-                      // Weight distribution bar
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(height: AppTheme.sm),
-                          Text('Weight Distribution',
-                              style: AppText.labelSm),
-                          const SizedBox(height: 6),
-                          ClipRRect(
-                            borderRadius: AppTheme.radiusFull,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  flex: s.stanceLeft.round(),
-                                  child: Container(
-                                    height: 12,
-                                    color: AppColors.primary,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: s.stanceRight.round(),
-                                  child: Container(
-                                    height: 12,
-                                    color: AppColors.secondary,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          Row(
-                            mainAxisAlignment:
-                                MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                  'Left ${s.stanceLeft.toStringAsFixed(0)}%',
-                                  style: AppText.labelSm.copyWith(
-                                      color: AppColors.primary)),
-                              Text(
-                                  'Right ${s.stanceRight.toStringAsFixed(0)}%',
-                                  style: AppText.labelSm.copyWith(
-                                      color: AppColors.secondary)),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppTheme.md),
-                  // Clinical insights
+                  // How to read
                   AppCard(
                     color: AppColors.tertiaryContainer.withAlpha(40),
                     child: Column(
@@ -205,32 +121,22 @@ class SemiogramDetailPage extends StatelessWidget {
                             const Icon(Icons.lightbulb_outline,
                                 color: AppColors.tertiary, size: 20),
                             const SizedBox(width: 8),
-                            Text('Clinical Insights',
-                                style: AppText.labelMd),
+                            Text('How to read', style: AppText.labelMd),
                           ],
                         ),
                         const SizedBox(height: AppTheme.sm),
                         Text(
-                          'The semiogram indicates reduced walking speed and asymmetric gait pattern consistent with moderate hemiplegia. Targeted physiotherapy focusing on heel strike phase may improve FMA-LE scores.',
+                          'Each parameter is standardised as Z = (value − mean) / SD '
+                          'against the reference population. The Z-coefficient '
+                          'sign (+/−) marks whether higher or lower is clinically '
+                          'better; green means the subject is on the favourable '
+                          'side of the reference, red means unfavourable.',
                           style: AppText.bodySm,
                         ),
                         const SizedBox(height: AppTheme.md),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: _TertiaryBtn(
-                                label: 'View Therapy Plan',
-                                onTap: () {},
-                              ),
-                            ),
-                            const SizedBox(width: AppTheme.sm),
-                            Expanded(
-                              child: _TertiaryBtn(
-                                label: 'Compare Past',
-                                onTap: () => context.go(AppRoutes.history),
-                              ),
-                            ),
-                          ],
+                        _TertiaryBtn(
+                          label: 'Compare Past Sessions',
+                          onTap: () => context.go(AppRoutes.history),
                         ),
                       ],
                     ),
@@ -299,22 +205,19 @@ class _LegendDot extends StatelessWidget {
   }
 }
 
-class _CollapsibleSection extends StatefulWidget {
-  final String title;
-  final IconData icon;
-  final List<Widget> children;
-
-  const _CollapsibleSection({
-    required this.title,
-    required this.icon,
-    required this.children,
-  });
+/// One collapsible card per semiogram criteria, holding the full reference
+/// table (Parameter / Mean / SD / Z-coefficient) plus the subject value and
+/// computed Z-score.
+class _CriteriaTable extends StatefulWidget {
+  final String criteria;
+  final List<SemiogramScore> scores;
+  const _CriteriaTable({required this.criteria, required this.scores});
 
   @override
-  State<_CollapsibleSection> createState() => _CollapsibleSectionState();
+  State<_CriteriaTable> createState() => _CriteriaTableState();
 }
 
-class _CollapsibleSectionState extends State<_CollapsibleSection> {
+class _CriteriaTableState extends State<_CriteriaTable> {
   bool _expanded = true;
 
   @override
@@ -329,20 +232,14 @@ class _CollapsibleSectionState extends State<_CollapsibleSection> {
               padding: const EdgeInsets.all(AppTheme.md),
               child: Row(
                 children: [
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withAlpha(26),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Icon(widget.icon,
-                        color: AppColors.primary, size: 18),
-                  ),
-                  const SizedBox(width: AppTheme.sm),
                   Expanded(
-                    child: Text(widget.title, style: AppText.labelMd),
+                    child: Text(widget.criteria,
+                        style: AppText.labelMd),
                   ),
+                  Text('${widget.scores.length} param',
+                      style: AppText.labelSm.copyWith(
+                          color: AppColors.onSurfaceVariant)),
+                  const SizedBox(width: 6),
                   Icon(
                     _expanded
                         ? Icons.expand_less
@@ -353,12 +250,50 @@ class _CollapsibleSectionState extends State<_CollapsibleSection> {
               ),
             ),
           ),
-          if (_expanded)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(
-                  AppTheme.md, 0, AppTheme.md, AppTheme.md),
-              child: Column(children: widget.children),
-            ),
+          if (_expanded) ...[
+            const _TableHeader(),
+            for (int i = 0; i < widget.scores.length; i++)
+              _ParamRow(
+                score: widget.scores[i],
+                isLast: i == widget.scores.length - 1,
+              ),
+          ],
+        ],
+      ),
+    );
+  }
+}
+
+class _TableHeader extends StatelessWidget {
+  const _TableHeader();
+
+  @override
+  Widget build(BuildContext context) {
+    final style = AppText.labelSm
+        .copyWith(color: AppColors.onSurfaceVariant);
+    return Container(
+      color: AppColors.surfaceContainerLow,
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppTheme.md, vertical: 8),
+      child: Row(
+        children: [
+          Expanded(flex: 30, child: Text('Parameter', style: style)),
+          Expanded(
+              flex: 22,
+              child: Text('Mean±SD', style: style,
+                  textAlign: TextAlign.right)),
+          Expanded(
+              flex: 12,
+              child: Text('Z-c', style: style,
+                  textAlign: TextAlign.center)),
+          Expanded(
+              flex: 18,
+              child: Text('Subj', style: style,
+                  textAlign: TextAlign.right)),
+          Expanded(
+              flex: 18,
+              child: Text('Z', style: style,
+                  textAlign: TextAlign.right)),
         ],
       ),
     );
@@ -366,23 +301,76 @@ class _CollapsibleSectionState extends State<_CollapsibleSection> {
 }
 
 class _ParamRow extends StatelessWidget {
-  final String label;
-  final String value;
-  const _ParamRow({required this.label, required this.value});
+  final SemiogramScore score;
+  final bool isLast;
+  const _ParamRow({required this.score, required this.isLast});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+    final p = score.param;
+    final favourable = score.isFavourable;
+    final zColor = favourable ? AppColors.success : AppColors.error;
+
+    return Container(
+      decoration: BoxDecoration(
+        border: isLast
+            ? null
+            : Border(
+                bottom: BorderSide(
+                    color: AppColors.outlineVariant.withAlpha(40))),
+      ),
+      padding: const EdgeInsets.symmetric(
+          horizontal: AppTheme.md, vertical: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label,
-              style: AppText.bodySm
-                  .copyWith(color: AppColors.onSurfaceVariant)),
-          Text(value,
+          Expanded(
+            flex: 30,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(p.name, style: AppText.labelSm),
+                Text(p.unit,
+                    style: AppText.labelSm.copyWith(
+                        color: AppColors.onSurfaceVariant)),
+              ],
+            ),
+          ),
+          Expanded(
+            flex: 22,
+            child: Text(
+              '${p.mean.toStringAsFixed(2)}±${p.sd.toStringAsFixed(2)}',
+              style: AppText.dataViz,
+              textAlign: TextAlign.right,
+            ),
+          ),
+          Expanded(
+            flex: 12,
+            child: Text(
+              p.zSign,
+              style: AppText.labelMd.copyWith(
+                  color: AppColors.onSurfaceVariant,
+                  fontWeight: FontWeight.w700),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Expanded(
+            flex: 18,
+            child: Text(
+              score.value.toStringAsFixed(2),
               style: AppText.dataViz
-                  .copyWith(color: AppColors.primary)),
+                  .copyWith(color: AppColors.primary),
+              textAlign: TextAlign.right,
+            ),
+          ),
+          Expanded(
+            flex: 18,
+            child: Text(
+              '${score.z >= 0 ? '+' : ''}${score.z.toStringAsFixed(2)}',
+              style: AppText.dataViz.copyWith(
+                  color: zColor, fontWeight: FontWeight.w700),
+              textAlign: TextAlign.right,
+            ),
+          ),
         ],
       ),
     );
@@ -399,6 +387,7 @@ class _TertiaryBtn extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(vertical: 10),
         decoration: BoxDecoration(
           borderRadius: AppTheme.radiusFull,
@@ -406,8 +395,7 @@ class _TertiaryBtn extends StatelessWidget {
               color: AppColors.tertiary.withAlpha(120), width: 1.5),
         ),
         child: Text(label,
-            style: AppText.labelSm
-                .copyWith(color: AppColors.tertiary),
+            style: AppText.labelSm.copyWith(color: AppColors.tertiary),
             textAlign: TextAlign.center),
       ),
     );
@@ -446,7 +434,6 @@ class _DetailRadarPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 1;
 
-    // Grid
     for (int ring = 1; ring <= 5; ring++) {
       final r = radius * ring / 5;
       final path = Path();
@@ -460,15 +447,15 @@ class _DetailRadarPainter extends CustomPainter {
       canvas.drawPath(path, gridPaint);
     }
 
-    // Axes
     for (int i = 0; i < sides; i++) {
       final a = -pi / 2 + i * angle;
-      canvas.drawLine(center,
-          Offset(center.dx + radius * cos(a), center.dy + radius * sin(a)),
+      canvas.drawLine(
+          center,
+          Offset(center.dx + radius * cos(a),
+              center.dy + radius * sin(a)),
           gridPaint);
     }
 
-    // Baseline polygon (all at 0.7)
     final basePath = Path();
     final basePaint = Paint()
       ..color = AppColors.outlineVariant.withAlpha(40)
@@ -489,7 +476,6 @@ class _DetailRadarPainter extends CustomPainter {
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.5);
 
-    // Data polygon
     final dataPath = Path();
     for (int i = 0; i < sides; i++) {
       final a = -pi / 2 + i * angle;
@@ -511,7 +497,6 @@ class _DetailRadarPainter extends CustomPainter {
           ..style = PaintingStyle.stroke
           ..strokeWidth = 2);
 
-    // Labels
     for (int i = 0; i < sides; i++) {
       final a = -pi / 2 + i * angle;
       final lx = center.dx + (radius + 22) * cos(a);

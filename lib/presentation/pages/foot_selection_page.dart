@@ -192,21 +192,26 @@ class _FootCard extends StatelessWidget {
             Container(
               height: 100,
               alignment: Alignment.center,
-              child: Icon(
-                side == 'left'
-                    ? Icons.directions_walk
-                    : Icons.directions_walk,
-                size: 80,
-                color: isSelected
-                    ? AppColors.primary
-                    : AppColors.outlineVariant,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    side == 'left'
+                        ? Icons.directions_walk
+                        : Icons.directions_walk,
+                    size: 80,
+                    color: isSelected
+                        ? AppColors.primary
+                        : AppColors.outlineVariant,
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: AppTheme.md),
             Text(label,
                 style: AppText.labelMd.copyWith(
                     color: isSelected
-                        ? AppColors.primary
+                        ? const Color.fromARGB(255, 132, 148, 146)
                         : AppColors.onSurface)),
             const SizedBox(height: AppTheme.xs),
             Text(

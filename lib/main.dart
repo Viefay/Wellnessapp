@@ -5,6 +5,7 @@ import 'app.dart';
 import 'firebase_options.dart';
 import 'presentation/providers/recording_provider.dart';
 import 'presentation/providers/session_provider.dart';
+import 'presentation/providers/profile_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +16,8 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => RecordingProvider()),
-        ChangeNotifierProvider(create: (_) => SessionProvider()),
+        ChangeNotifierProvider(create: (_) => SessionProvider()..loadHistory()),
+        ChangeNotifierProvider(create: (_) => ProfileProvider()..load()),
       ],
       child: const WellnessApp(),
     ),

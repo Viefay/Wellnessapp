@@ -7,7 +7,10 @@ import '../../core/constants/app_routes.dart';
 import '../../core/constants/app_text_styles.dart';
 import '../../core/theme/app_theme.dart';
 import '../../core/utils/dummy_data.dart';
+import '../../data/services/api_service.dart';
 import '../providers/session_provider.dart';
+import '../providers/recording_provider.dart';
+import '../providers/profile_provider.dart';
 import '../widgets/bottom_nav_shell.dart';
 
 class ProcessingPage extends StatefulWidget {
@@ -42,17 +45,54 @@ class _ProcessingPageState extends State<ProcessingPage>
   }
 
   void _runSteps() {
+    // Cosmetic step animation while the real backend call runs.
     for (int i = 0; i < _steps.length; i++) {
-      Future.delayed(Duration(milliseconds: 600 + i * 700), () {
-        if (mounted) setState(() => _currentStep = i + 1);
+      Future.delayed(Duration(milliseconds: 500 + i * 600), () {
+        if (mounted && _currentStep < i + 1) {
+          setState(() => _currentStep = i + 1);
+        }
       });
     }
-    Future.delayed(Duration(milliseconds: 600 + _steps.length * 700 + 400), () {
-      if (mounted) {
-        context.read<SessionProvider>().setResult(dummyResult);
-        context.go(AppRoutes.result);
-      }
-    });
+    _analyze();
+  }
+
+  Future<void> _analyze() async {
+    final recording = context.read<RecordingProvider>();
+    final profile = context.read<ProfileProvider>().profile;
+    final session = context.read<SessionProvider>();
+    final messenger = ScaffoldMessenger.of(context);
+
+    var result = dummyResult;
+    String? error;
+    try {
+      result = await ApiService().analyzeGaitSession(
+        timeseries: recording.recordedData,
+        profile: profile,
+        samplingRateHz: recording.samplingRateHz,
+      );
+    } on ApiException catch (e) {
+      error = e.message;
+    } catch (e) {
+      error = e.toString();
+    }
+    if (!mounted) return;
+
+    // Let the step animation breathe a little before navigating.
+    if (_currentStep < _steps.length) {
+      setState(() => _currentStep = _steps.length);
+    }
+    await Future.delayed(const Duration(milliseconds: 400));
+    if (!mounted) return;
+
+    session.setResult(result);
+    if (error != null) {
+      messenger.showSnackBar(SnackBar(
+        content: Text(
+            'Backend unavailable — showing sample result. $error'),
+        duration: const Duration(seconds: 4),
+      ));
+    }
+    context.go(AppRoutes.result);
   }
 
   @override
