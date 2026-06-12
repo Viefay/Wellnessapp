@@ -1,0 +1,151 @@
+{
+  "subject": "HS_5",
+  "age": 44,
+  "gender": "F",
+  "height": 1.6,
+  "weight": 80.0,
+  "BMI": 31.2,
+  "laterality": "left",
+  "group": "healthy",
+  "pathology": "healthy subject",
+  "pathologyKey": "HS",
+  "clinicalDeficitSide": null,
+  "evaluationScoreName": null,
+  "evaluationScoreValue": null,
+  "session": 1,
+  "daysSinceFirstSession": 0,
+  "trial": 1,
+  "freq": 100.0,
+  "sensor": "TechnoConcept",
+  "protocol": "10.0m - uturn - 10.0m",
+  "TUG": 7.2,
+  "visualGaitAssessment": "Not evaluated",
+  "uturnBoundaries": [
+    917,
+    1074
+  ],
+  "leftGaitEvents": [
+    [
+      275,
+      317
+    ],
+    [
+      376,
+      411
+    ],
+    [
+      465,
+      501
+    ],
+    [
+      557,
+      593
+    ],
+    [
+      654,
+      689
+    ],
+    [
+      751,
+      788
+    ],
+    [
+      851,
+      888
+    ],
+    [
+      950,
+      975
+    ],
+    [
+      1044,
+      1083
+    ],
+    [
+      1144,
+      1180
+    ],
+    [
+      1238,
+      1274
+    ],
+    [
+      1337,
+      1374
+    ],
+    [
+      1436,
+      1472
+    ],
+    [
+      1534,
+      1570
+    ],
+    [
+      1634,
+      1674
+    ]
+  ],
+  "rightGaitEvents": [
+    [
+      334,
+      367
+    ],
+    [
+      419,
+      455
+    ],
+    [
+      512,
+      546
+    ],
+    [
+      605,
+      642
+    ],
+    [
+      702,
+      738
+    ],
+    [
+      801,
+      837
+    ],
+    [
+      903,
+      938
+    ],
+    [
+      983,
+      1035
+    ],
+    [
+      1097,
+      1133
+    ],
+    [
+      1191,
+      1228
+    ],
+    [
+      1285,
+      1323
+    ],
+    [
+      1388,
+      1423
+    ],
+    [
+      1485,
+      1522
+    ],
+    [
+      1584,
+      1621
+    ],
+    [
+      1688,
+      1727
+    ]
+  ]
+}

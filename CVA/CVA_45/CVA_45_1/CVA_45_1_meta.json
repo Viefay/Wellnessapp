@@ -1,0 +1,163 @@
+{
+  "subject": "CVA_45",
+  "age": 83,
+  "gender": "F",
+  "height": 1.72,
+  "weight": 52.0,
+  "BMI": 17.6,
+  "laterality": "right",
+  "group": "neuro",
+  "pathology": "cerebrovascular accident",
+  "pathologyKey": "CVA",
+  "clinicalDeficitSide": "left",
+  "evaluationScoreName": "FMA-LE (/34)",
+  "evaluationScoreValue": 31.0,
+  "session": 1,
+  "daysSinceFirstSession": 0,
+  "trial": 1,
+  "freq": 100.0,
+  "sensor": "TechnoConcept",
+  "protocol": "10.0m - uturn - 10.0m",
+  "TUG": 10.5,
+  "visualGaitAssessment": 1.0,
+  "uturnBoundaries": [
+    947,
+    1127
+  ],
+  "leftGaitEvents": [
+    [
+      226,
+      272
+    ],
+    [
+      339,
+      383
+    ],
+    [
+      445,
+      487
+    ],
+    [
+      547,
+      588
+    ],
+    [
+      648,
+      688
+    ],
+    [
+      750,
+      792
+    ],
+    [
+      853,
+      897
+    ],
+    [
+      960,
+      1004
+    ],
+    [
+      1137,
+      1178
+    ],
+    [
+      1244,
+      1286
+    ],
+    [
+      1348,
+      1390
+    ],
+    [
+      1453,
+      1495
+    ],
+    [
+      1556,
+      1597
+    ],
+    [
+      1658,
+      1700
+    ],
+    [
+      1763,
+      1805
+    ],
+    [
+      1871,
+      1918
+    ]
+  ],
+  "rightGaitEvents": [
+    [
+      160,
+      211
+    ],
+    [
+      286,
+      327
+    ],
+    [
+      395,
+      433
+    ],
+    [
+      497,
+      535
+    ],
+    [
+      599,
+      637
+    ],
+    [
+      699,
+      740
+    ],
+    [
+      802,
+      842
+    ],
+    [
+      907,
+      947
+    ],
+    [
+      1011,
+      1071
+    ],
+    [
+      1192,
+      1232
+    ],
+    [
+      1297,
+      1337
+    ],
+    [
+      1402,
+      1442
+    ],
+    [
+      1505,
+      1545
+    ],
+    [
+      1607,
+      1647
+    ],
+    [
+      1711,
+      1750
+    ],
+    [
+      1816,
+      1858
+    ],
+    [
+      1929,
+      1965
+    ]
+  ]
+}

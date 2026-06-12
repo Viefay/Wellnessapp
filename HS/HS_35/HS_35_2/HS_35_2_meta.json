@@ -1,0 +1,151 @@
+{
+  "subject": "HS_35",
+  "age": 18,
+  "gender": "F",
+  "height": 1.67,
+  "weight": 63.0,
+  "BMI": 22.6,
+  "laterality": "right",
+  "group": "healthy",
+  "pathology": "healthy subject",
+  "pathologyKey": "HS",
+  "clinicalDeficitSide": null,
+  "evaluationScoreName": null,
+  "evaluationScoreValue": null,
+  "session": 1,
+  "daysSinceFirstSession": 0,
+  "trial": 2,
+  "freq": 100.0,
+  "sensor": "MTw Awinda XSens",
+  "protocol": "10.0m - uturn - 10.0m",
+  "TUG": "Not evaluated",
+  "visualGaitAssessment": 0.0,
+  "uturnBoundaries": [
+    1063,
+    1227
+  ],
+  "leftGaitEvents": [
+    [
+      382,
+      426
+    ],
+    [
+      498,
+      540
+    ],
+    [
+      609,
+      654
+    ],
+    [
+      722,
+      767
+    ],
+    [
+      837,
+      883
+    ],
+    [
+      954,
+      996
+    ],
+    [
+      1074,
+      1109
+    ],
+    [
+      1154,
+      1202
+    ],
+    [
+      1277,
+      1325
+    ],
+    [
+      1401,
+      1449
+    ],
+    [
+      1528,
+      1584
+    ],
+    [
+      1661,
+      1710
+    ],
+    [
+      1797,
+      1845
+    ],
+    [
+      1929,
+      1976
+    ],
+    [
+      2052,
+      2099
+    ]
+  ],
+  "rightGaitEvents": [
+    [
+      324,
+      360
+    ],
+    [
+      438,
+      482
+    ],
+    [
+      554,
+      596
+    ],
+    [
+      666,
+      708
+    ],
+    [
+      780,
+      824
+    ],
+    [
+      896,
+      940
+    ],
+    [
+      1010,
+      1061
+    ],
+    [
+      1217,
+      1262
+    ],
+    [
+      1339,
+      1384
+    ],
+    [
+      1464,
+      1512
+    ],
+    [
+      1600,
+      1645
+    ],
+    [
+      1727,
+      1781
+    ],
+    [
+      1862,
+      1912
+    ],
+    [
+      1990,
+      2035
+    ],
+    [
+      2114,
+      2150
+    ]
+  ]
+}
