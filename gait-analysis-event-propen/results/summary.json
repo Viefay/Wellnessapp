@@ -1,0 +1,19 @@
+{
+  "total_trials": 264,
+  "pathologies": [
+    "RIL",
+    "HS",
+    "CIPN",
+    "CVA",
+    "PD"
+  ],
+  "sensor_configs": [
+    "LFRF"
+  ],
+  "model_architecture": "BiTCN-BiGRU-CrossAttention",
+  "metrics": {
+    "test_loss": 0.8635324239730835,
+    "left_event_accuracy": 0.43344324827194214,
+    "right_event_accuracy": 0.42996641993522644
+  }
+}
