@@ -1,0 +1,23 @@
+{
+    "name": "Wellness App",
+    "short_name": "Wellness",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#f4fbf8",
+    "theme_color": "#006A62",
+    "description": "Smart gait assessment from your smartphone",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

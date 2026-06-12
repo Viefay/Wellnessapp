@@ -1,0 +1,220 @@
+<!DOCTYPE html><html class="light" lang="en"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Gait Analysis - Before You Start</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#3c4947",
+                        "secondary": "#485f84",
+                        "surface-dim": "#d5dbd9",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#004c46",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#ff9468",
+                        "outline": "#6c7a77",
+                        "on-primary-fixed": "#00201d",
+                        "inverse-primary": "#4fdbcc",
+                        "surface-container-highest": "#dde4e2",
+                        "surface-container": "#e9efed",
+                        "on-surface": "#161d1c",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "surface": "#f4fbf8",
+                        "surface-tint": "#006a62",
+                        "inverse-surface": "#2b3230",
+                        "on-secondary-container": "#445a7f",
+                        "on-tertiary-fixed": "#370e00",
+                        "tertiary": "#9a4520",
+                        "surface-variant": "#dde4e2",
+                        "outline-variant": "#bbcac6",
+                        "primary": "#006a62",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#161d1c",
+                        "on-primary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#001b3c",
+                        "surface-bright": "#f4fbf8",
+                        "tertiary-fixed": "#ffdbce",
+                        "primary-container": "#2ec4b6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#7b2f0a",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#70f8e8",
+                        "surface-container-low": "#eff5f3",
+                        "inverse-on-surface": "#ecf2f0",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e3eae7",
+                        "secondary-fixed-dim": "#b0c7f1",
+                        "secondary-fixed": "#d5e3ff",
+                        "secondary-container": "#bbd3fd",
+                        "primary-fixed-dim": "#4fdbcc",
+                        "on-secondary-fixed-variant": "#30476a",
+                        "on-tertiary-container": "#762b06",
+                        "background": "#f4fbf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "md": "16px",
+                        "gutter-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Nunito Sans"],
+                        "headline-sm": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "data-viz": ["Inter"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "data-viz": ["14px", {"lineHeight": "18px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-shadow {
+            box-shadow: 0 4px 20px 0 rgba(29, 53, 87, 0.06);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  <style id="custom-cursor" type="text/css">body button, body [type='button'], body input[type='reset'], body input[type='submit'], body [role="button"], ::-webkit-search-cancel-button, ::-webkit-search-decoration, ::-webkit-scrollbar-button, ::-webkit-file-upload-button, [role^=button], .cc_pointer, [type="search"]::-webkit-search-cancel-button, a, select, [type="search"]::-webkit-search-decoration, .paper-button, .ytp-progress-bar-container, input[type=submit], :link, :visited, a > *, img,  ::-webkit-scrollbar-button, .ogdlpmhglpejoiomcodnpjnfgcpmgale_pointer, ::-webkit-file-upload-button, .ytp-volume-panel, #myogdlpmhglpejoiomcodnpjnfgcpmgale .icon, body .custom-cursor-on-hover {cursor: url("data:image/png;base64,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") 9 1, pointer !important;} html,body,body select,body .custom-cursor-default-hover {cursor: url("data:image/png;base64,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") 0 0, auto !important;}</style></head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-background selection:bg-primary-container selection:text-on-primary-container">
+<!-- Top Navigation (Shell Invisible for Transactional Task as per mandate) -->
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-50 shadow-sm flex justify-between items-center px-margin-mobile h-16 w-full">
+<div class="flex items-center gap-md">
+<button class="transition-all duration-200 active:scale-95 text-on-surface-variant">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h1 class="font-headline-sm text-headline-sm text-primary">Before You Start</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">info</span>
+</div>
+</header>
+<main class="flex-grow px-margin-mobile pt-xl pb-xl max-w-xl mx-auto w-full">
+<!-- Hero Illustration Area -->
+<section class="mb-xl text-center">
+<div class="w-full aspect-[16/9] rounded-lg bg-surface-container-high mb-lg overflow-hidden relative">
+<div class="absolute inset-0 bg-gradient-to-tr from-primary/10 to-transparent"></div>
+<img alt="Wellness Guide" class="w-full h-full object-cover" data-alt="A clean, high-key fitness studio background with soft lighting, reflecting a professional wellness app aesthetic. A person is shown from the waist down wearing high-performance athletic gear and sneakers, preparing for a movement assessment. The scene uses a soft palette of mint greens, teals, and navy accents to convey a sense of calm and clinical precision. The overall mood is supportive and tech-forward with minimal clutter." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDWzQ91i_Cm363zVQEjSxH_-J-noNQNNVH9SJFp4b_XawTRBwIzeWdaJalHrI6gxcvk7iwPKOy43C3rFCaF0b7o8feO_lYsxQqmREkuEJnyWw1yYR_71SBHJID8954iBp_ZvWtR6xw2A9uj-A-OLtKt5WOz5d1AY6DCG8yqFeVM4iUEGwbiwhYfKAUCtb-a6EBLJH7F7nKEUab7LCRnYPygApcSzy081YvIdmLSDN0PwJWb7YiCTHXNHggKi3ukq2EwcpX_f5U_mfA">
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-sm mx-auto">
+                Follow these simple steps to ensure your gait analysis is accurate and helpful.
+            </p>
+</section>
+<!-- Instruction Cards (Checklist Style) -->
+<div class="space-y-md">
+<!-- Instruction 1 -->
+<div class="bg-surface-container-lowest custom-shadow rounded-lg p-lg flex gap-md border border-transparent transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;wght&quot; 600;">smartphone</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Attach Your Phone</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Secure your phone firmly on the lateral side of your selected foot using a strap or tight sock.</p>
+</div>
+<div class="shrink-0 flex items-start pt-1">
+<div class="w-6 h-6 rounded-sm border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm font-bold opacity-0">check</span>
+</div>
+</div>
+</div>
+<!-- Instruction 2 -->
+<div class="bg-surface-container-lowest custom-shadow rounded-lg p-lg flex gap-md border border-transparent transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;wght&quot; 600;">directions_walk</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Walk Naturally</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Walk at your most comfortable, everyday speed across a flat surface for 10 meters.</p>
+</div>
+<div class="shrink-0 flex items-start pt-1">
+<div class="w-6 h-6 rounded-sm border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm font-bold opacity-0">check</span>
+</div>
+</div>
+</div>
+<!-- Instruction 3 -->
+<div class="bg-surface-container-lowest custom-shadow rounded-lg p-lg flex gap-md border border-transparent transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;wght&quot; 600;">repeat</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Record Both Feet</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">To get a full analysis, you will need to repeat the test for both your right and left foot.</p>
+</div>
+<div class="shrink-0 flex items-start pt-1">
+<div class="w-6 h-6 rounded-sm border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm font-bold opacity-0">check</span>
+</div>
+</div>
+</div>
+<!-- Instruction 4 -->
+<div class="bg-surface-container-lowest custom-shadow rounded-lg p-lg flex gap-md border border-transparent transition-all active:scale-[0.98]">
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: &quot;wght&quot; 600;">health_and_safety</span>
+</div>
+<div class="flex-grow">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-xs">Stay Safe</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Ensure your walking path is clear of obstacles and avoid slippery surfaces during the test.</p>
+</div>
+<div class="shrink-0 flex items-start pt-1">
+<div class="w-6 h-6 rounded-sm border-2 border-outline-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm font-bold opacity-0">check</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Reassurance Banner -->
+<div class="mt-xl p-lg bg-secondary-container/30 rounded-lg border border-secondary-container flex items-center gap-md">
+<span class="material-symbols-outlined text-on-secondary-container">verified_user</span>
+<p class="font-label-md text-label-md text-on-secondary-container">
+                Your data is encrypted and used only for your clinical analysis.
+            </p>
+</div>
+</main>
+<!-- Footer Action -->
+<footer class="p-margin-mobile bg-surface/90 backdrop-blur-md sticky bottom-0">
+<button class="w-full h-14 rounded-full bg-primary text-on-primary font-headline-sm text-headline-sm shadow-lg transition-transform active:scale-95 hover:bg-primary/90">
+            Continue
+        </button>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&amp;family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface-variant": "#3c4947",
+                        "secondary": "#485f84",
+                        "surface-dim": "#d5dbd9",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#004c46",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#ff9468",
+                        "outline": "#6c7a77",
+                        "on-primary-fixed": "#00201d",
+                        "inverse-primary": "#4fdbcc",
+                        "surface-container-highest": "#dde4e2",
+                        "surface-container": "#e9efed",
+                        "on-surface": "#161d1c",
+                        "on-secondary": "#ffffff",
+                        "tertiary-fixed-dim": "#ffb599",
+                        "surface": "#f4fbf8",
+                        "surface-tint": "#006a62",
+                        "inverse-surface": "#2b3230",
+                        "on-secondary-container": "#445a7f",
+                        "on-tertiary-fixed": "#370e00",
+                        "tertiary": "#9a4520",
+                        "surface-variant": "#dde4e2",
+                        "outline-variant": "#bbcac6",
+                        "primary": "#006a62",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#161d1c",
+                        "on-primary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#001b3c",
+                        "surface-bright": "#f4fbf8",
+                        "tertiary-fixed": "#ffdbce",
+                        "primary-container": "#2ec4b6",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed-variant": "#7b2f0a",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#70f8e8",
+                        "surface-container-low": "#eff5f3",
+                        "inverse-on-surface": "#ecf2f0",
+                        "on-error-container": "#93000a",
+                        "surface-container-high": "#e3eae7",
+                        "secondary-fixed-dim": "#b0c7f1",
+                        "secondary-fixed": "#d5e3ff",
+                        "secondary-container": "#bbd3fd",
+                        "primary-fixed-dim": "#4fdbcc",
+                        "on-secondary-fixed-variant": "#30476a",
+                        "on-tertiary-container": "#762b06",
+                        "background": "#f4fbf8"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "base": "8px",
+                        "sm": "12px",
+                        "margin-mobile": "20px",
+                        "md": "16px",
+                        "gutter-mobile": "16px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Nunito Sans"],
+                        "headline-sm": ["Nunito Sans"],
+                        "body-lg": ["Nunito Sans"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "data-viz": ["Inter"],
+                        "headline-md": ["Nunito Sans"],
+                        "body-md": ["Nunito Sans"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                        "data-viz": ["14px", {"lineHeight": "18px", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md overflow-hidden">
+<!-- Top Navigation Bar (Simplified for Onboarding) -->
+<header class="flex justify-between items-center px-margin-mobile h-16 w-full sticky top-0 bg-surface/80 backdrop-blur-md z-10">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="directions_run">directions_run</span>
+<h1 class="font-display-lg text-headline-sm text-primary">Gait Analysis</h1>
+</div>
+<button class="font-label-md text-primary hover:opacity-80 transition-all active:scale-95">
+            Skip
+        </button>
+</header>
+<!-- Main Content: Onboarding Carousel Container -->
+<main class="flex-1 flex flex-col relative">
+<!-- Slide Content (Currently showing Slide 1 as primary example) -->
+<section class="flex-1 flex flex-col px-margin-mobile py-xl">
+<!-- Illustration Area: Bento-inspired layout for visual balance -->
+<div class="w-full aspect-[4/5] max-h-[400px] mb-xl relative overflow-hidden rounded-xl bg-surface-container-lowest shadow-[0_4px_20px_0_rgba(29,53,87,0.06)]">
+<div class="absolute inset-0 bg-gradient-to-br from-primary-container/20 to-transparent"></div>
+<!-- Main Illustration Placeholder -->
+<div class="absolute inset-0 flex items-center justify-center p-xl">
+<img alt="Analyzing Walking Pattern Illustration" class="w-full h-full object-cover rounded-lg mix-blend-multiply opacity-90" data-alt="A clean and professional digital illustration of a person's legs in mid-stride, showcasing the mechanical precision of walking. Minimalist geometric human forms in soft teal and mint tones are highlighted with deep navy dots at the ankle and knee joints. The background is a crisp off-white gallery space with soft, natural lighting, creating a high-end wellness app aesthetic that feels both medical-grade and welcoming." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFDJmIxLkaDpMRbGYGXrCH6Xa_ByDdyOEkhgwTth-QgLD_mPpvNy0Rvbpa9bCo1q27JoeowtAi-0y41Us78h-8LfOPw01A91t_Hus7qKw7FbCN7RbVvmzhD4WLIDpMemNSRBe4-BS6oYr2ziBS55snk0Q3iPG6cGP2TzYhvM1_oDZa12agQ9Wvon6yiDLXVjDiXE_JwJ-OrkKa479IePcuWyS3AwuoueDGtMyczqFObII14wMpLg-sRyOLZPiFXo68yznWXJJDTRA"/>
+</div>
+<!-- Floating Data Chips for visual depth -->
+<div class="absolute top-md right-md bg-white/90 backdrop-blur-sm px-sm py-xs rounded-full border border-primary-container/30 flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-primary text-[16px]" data-icon="check_circle" data-weight="fill">check_circle</span>
+<span class="font-label-sm text-on-surface-variant">Live Sensors</span>
+</div>
+</div>
+<!-- Typography Content -->
+<div class="flex flex-col gap-md text-center">
+<h2 class="font-display-lg text-display-lg text-on-surface leading-tight">
+                    Analyze Your Walking Pattern
+                </h2>
+<p class="font-body-lg text-on-surface-variant max-w-[280px] mx-auto">
+                    Use your smartphone sensors to understand your gait quality.
+                </p>
+</div>
+</section>
+<!-- Footer Actions Area -->
+<div class="px-margin-mobile pb-xl flex flex-col items-center gap-xl">
+<!-- Page Indicator Dots -->
+<div class="flex gap-2">
+<div class="w-8 h-2 rounded-full bg-primary transition-all"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest transition-all"></div>
+<div class="w-2 h-2 rounded-full bg-surface-container-highest transition-all"></div>
+</div>
+<!-- Action Buttons -->
+<div class="w-full flex flex-col gap-md">
+<button class="w-full bg-primary text-on-primary py-md px-lg rounded-full font-label-md text-body-lg shadow-[0_8px_24px_rgba(46,196,182,0.15)] transition-all duration-200 active:scale-95 flex items-center justify-center gap-2">
+                    Get Started
+                    <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<!-- Bottom Description for context (Optional but nice for Wellness feel) -->
+<p class="font-label-sm text-outline text-center px-lg">
+                    By continuing, you agree to our privacy policy regarding sensor data collection.
+                </p>
+</div>
+</div>
+</main>
+<!-- Background Decoration: Subtle shapes for brand feel -->
+<div class="fixed top-[-10%] right-[-10%] w-[300px] h-[300px] bg-primary-container/10 rounded-full blur-3xl -z-10"></div>
+<div class="fixed bottom-[-5%] left-[-10%] w-[250px] h-[250px] bg-tertiary-container/10 rounded-full blur-3xl -z-10"></div>
+</body></html>

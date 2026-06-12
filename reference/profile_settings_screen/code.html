@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Wellness App - Profile &amp; Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700;800&amp;family=Inter:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-surface-variant": "#3c4947",
+                      "secondary": "#485f84",
+                      "surface-dim": "#d5dbd9",
+                      "on-error": "#ffffff",
+                      "on-primary-container": "#004c46",
+                      "on-primary": "#ffffff",
+                      "tertiary-container": "#ff9468",
+                      "outline": "#6c7a77",
+                      "on-primary-fixed": "#00201d",
+                      "inverse-primary": "#4fdbcc",
+                      "surface-container-highest": "#dde4e2",
+                      "surface-container": "#e9efed",
+                      "on-surface": "#161d1c",
+                      "on-secondary": "#ffffff",
+                      "tertiary-fixed-dim": "#ffb599",
+                      "surface": "#f4fbf8",
+                      "surface-tint": "#006a62",
+                      "inverse-surface": "#2b3230",
+                      "on-secondary-container": "#445a7f",
+                      "on-tertiary-fixed": "#370e00",
+                      "tertiary": "#9a4520",
+                      "surface-variant": "#dde4e2",
+                      "outline-variant": "#bbcac6",
+                      "primary": "#006a62",
+                      "surface-container-lowest": "#ffffff",
+                      "on-background": "#161d1c",
+                      "on-primary-fixed-variant": "#005049",
+                      "on-secondary-fixed": "#001b3c",
+                      "surface-bright": "#f4fbf8",
+                      "tertiary-fixed": "#ffdbce",
+                      "primary-container": "#2ec4b6",
+                      "error-container": "#ffdad6",
+                      "on-tertiary-fixed-variant": "#7b2f0a",
+                      "on-tertiary": "#ffffff",
+                      "error": "#ba1a1a",
+                      "primary-fixed": "#70f8e8",
+                      "surface-container-low": "#eff5f3",
+                      "inverse-on-surface": "#ecf2f0",
+                      "on-error-container": "#93000a",
+                      "surface-container-high": "#e3eae7",
+                      "secondary-fixed-dim": "#b0c7f1",
+                      "secondary-fixed": "#d5e3ff",
+                      "secondary-container": "#bbd3fd",
+                      "primary-fixed-dim": "#4fdbcc",
+                      "on-secondary-fixed-variant": "#30476a",
+                      "on-tertiary-container": "#762b06",
+                      "background": "#f4fbf8"
+              },
+              "borderRadius": {
+                      "DEFAULT": "1rem",
+                      "lg": "2rem",
+                      "xl": "3rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "xl": "32px",
+                      "lg": "24px",
+                      "base": "8px",
+                      "sm": "12px",
+                      "margin-mobile": "20px",
+                      "md": "16px",
+                      "gutter-mobile": "16px"
+              },
+              "fontFamily": {
+                      "display-lg": ["Nunito Sans"],
+                      "headline-sm": ["Nunito Sans"],
+                      "body-lg": ["Nunito Sans"],
+                      "label-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "data-viz": ["Inter"],
+                      "headline-md": ["Nunito Sans"],
+                      "body-md": ["Nunito Sans"]
+              },
+              "fontSize": {
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                      "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                      "data-viz": ["14px", {"lineHeight": "18px", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #f4fbf8;
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen text-on-surface">
+<!-- TopAppBar Shell -->
+<header class="bg-surface/80 backdrop-blur-md sticky top-0 z-50 w-full h-16 flex justify-between items-center px-margin-mobile shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary/20">
+<img alt="User Profile photo" class="w-full h-full object-cover" data-alt="A professional headshot of a person with a friendly expression, set against a soft blurred background. The lighting is natural and high-key, aligning with a clean and clinical wellness aesthetic. The individual has a modern appearance that fits a tech-forward wellness application, maintaining a professional yet approachable tone." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDB5NZ3QDWklcp5K9SVR9BygMbFDJyYWdHdXZEz-U9jaqMSq9pHmjdEhJqp-Mf2Geg-iIn_HNp04QQkjJk5oGSsNEloOy2IJVmfLP28z8TDeck2-8ANWejG9hEWRfN3X5i1QpLY5p8GNZIi4cdQ6zbwpCjCgypUfZlRxltaf7S6ZPmrd0UpEjFgA2wCyt6I04JswDowStnq3Aj4fJBQUQLIQGku-CxNkzHin44eQfZZ95oRztYBVYtdZVDAr5DWekV7XyqTKk-Ij8Y"/>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Gait Analysis</h1>
+</div>
+<button class="text-primary hover:opacity-80 transition-all duration-200 active:scale-95">
+<span class="material-symbols-outlined" data-icon="sensors">sensors</span>
+</button>
+</header>
+<main class="px-margin-mobile pt-lg pb-xl max-w-2xl mx-auto space-y-xl">
+<!-- Profile Card -->
+<section class="bg-surface-container-lowest rounded-lg p-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] flex flex-col items-center text-center">
+<div class="relative mb-md">
+<div class="w-24 h-24 rounded-full bg-primary-container/20 flex items-center justify-center border-4 border-white shadow-sm overflow-hidden">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A close-up studio portrait of a healthy adult male with a gentle smile, symbolizing vitality and wellness. The background is a clean, neutral soft mint green that matches the app's professional color palette. High-end soft lighting emphasizes clarity and warmth, creating a supportive and non-intimidating medical-grade atmosphere." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3Np6ExRDlxEBlexQO9TFLQ-X1YdGe8pQXQ7coHPupzrqfqk87Ip1nNddFvy7XrlX8eOtFGGC4DmWu6d6Z9f7ebAZ6lJ0xla3x27cK31TEgsxq99zKSwnlcxtY1xEL-SsxHOuse8888Dy8W674rl2B16_zXV6ogrOXa9-D_9xBXMexIAswD48Gf-W0qqH4SfyGjs5NW10RfKzLhdklpmbDfhyTXFT2FGQhdjSCyAji002tK-blde_bfgvBd26VAKETFdQ9BpYhy8g"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary p-1.5 rounded-full border-2 border-white text-white">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">edit</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface">User Profile</h2>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label-md text-label-md text-on-surface-variant">John Doe, 34</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+<span class="font-label-md text-label-md text-primary">Pro Athlete</span>
+</div>
+</section>
+<!-- Settings List -->
+<section class="space-y-md">
+<h3 class="font-label-sm text-label-sm text-on-surface-variant px-2 uppercase tracking-widest">System Settings</h3>
+<div class="bg-surface-container-lowest rounded-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] overflow-hidden">
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/30 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="tune">tune</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Sensor Calibration</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="mx-md border-t border-outline-variant/20"></div>
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/30 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Data Privacy</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="mx-md border-t border-outline-variant/20"></div>
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/30 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="file_export">file_export</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">Export Data</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="mx-md border-t border-outline-variant/20"></div>
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/30 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="cloud_sync">cloud_sync</span>
+</div>
+<div class="text-left">
+<p class="font-body-md text-body-md text-on-surface">Backend Connection Status</p>
+<p class="font-label-sm text-label-sm text-primary">Connected</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<div class="mx-md border-t border-outline-variant/20"></div>
+<button class="w-full flex items-center justify-between p-md hover:bg-surface-variant/30 transition-all active:scale-[0.98]">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-primary-container/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="info">info</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface">About App</span>
+</div>
+<span class="material-symbols-outlined text-outline-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- App Branding -->
+<section class="flex flex-col items-center justify-center space-y-xs opacity-60 pb-xl">
+<p class="font-label-sm text-label-sm text-on-surface-variant">Wellness App v1.0</p>
+<p class="font-label-sm text-label-sm text-outline">Engineered for Human Potential</p>
+</section>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 shadow-[0_-4px_20px_0_rgba(29,53,87,0.06)] rounded-t-lg">
+<div class="flex justify-around items-center pt-2 pb-safe px-4 h-20">
+<!-- Home -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 px-4 py-1">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</button>
+<!-- Record -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 px-4 py-1">
+<span class="material-symbols-outlined" data-icon="fiber_manual_record">fiber_manual_record</span>
+<span class="font-label-sm text-label-sm">Record</span>
+</button>
+<!-- History -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 px-4 py-1">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</button>
+<!-- Profile (Active) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-2xl px-4 py-1 transition-transform duration-300 active:scale-90">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</button>
+</div>
+</nav>
+<!-- Spacer for navigation -->
+<div class="h-24"></div>
+</body></html>

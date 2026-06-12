@@ -1,0 +1,6 @@
+flask>=3.0
+flask-cors>=4.0
+numpy>=1.26
+onnxruntime>=1.17
+onnx>=1.16
+tensorflow-cpu==2.20.*

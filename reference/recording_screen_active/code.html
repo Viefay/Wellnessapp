@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,700;0,800;1,400&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#3c4947",
+                    "secondary": "#485f84",
+                    "surface-dim": "#d5dbd9",
+                    "on-error": "#ffffff",
+                    "on-primary-container": "#004c46",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#ff9468",
+                    "outline": "#6c7a77",
+                    "on-primary-fixed": "#00201d",
+                    "inverse-primary": "#4fdbcc",
+                    "surface-container-highest": "#dde4e2",
+                    "surface-container": "#e9efed",
+                    "on-surface": "#161d1c",
+                    "on-secondary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb599",
+                    "surface": "#f4fbf8",
+                    "surface-tint": "#006a62",
+                    "inverse-surface": "#2b3230",
+                    "on-secondary-container": "#445a7f",
+                    "on-tertiary-fixed": "#370e00",
+                    "tertiary": "#9a4520",
+                    "surface-variant": "#dde4e2",
+                    "outline-variant": "#bbcac6",
+                    "primary": "#006a62",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#161d1c",
+                    "on-primary-fixed-variant": "#005049",
+                    "on-secondary-fixed": "#001b3c",
+                    "surface-bright": "#f4fbf8",
+                    "tertiary-fixed": "#ffdbce",
+                    "primary-container": "#2ec4b6",
+                    "error-container": "#ffdad6",
+                    "on-tertiary-fixed-variant": "#7b2f0a",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a",
+                    "primary-fixed": "#70f8e8",
+                    "surface-container-low": "#eff5f3",
+                    "inverse-on-surface": "#ecf2f0",
+                    "on-error-container": "#93000a",
+                    "surface-container-high": "#e3eae7",
+                    "secondary-fixed-dim": "#b0c7f1",
+                    "secondary-fixed": "#d5e3ff",
+                    "secondary-container": "#bbd3fd",
+                    "primary-fixed-dim": "#4fdbcc",
+                    "on-secondary-fixed-variant": "#30476a",
+                    "on-tertiary-container": "#762b06",
+                    "background": "#f4fbf8"
+            },
+            "borderRadius": {
+                    "DEFAULT": "1rem",
+                    "lg": "2rem",
+                    "xl": "3rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "xs": "4px",
+                    "xl": "32px",
+                    "lg": "24px",
+                    "base": "8px",
+                    "sm": "12px",
+                    "margin-mobile": "20px",
+                    "md": "16px",
+                    "gutter-mobile": "16px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Nunito Sans"],
+                    "headline-sm": ["Nunito Sans"],
+                    "body-lg": ["Nunito Sans"],
+                    "label-md": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "data-viz": ["Inter"],
+                    "headline-md": ["Nunito Sans"],
+                    "body-md": ["Nunito Sans"]
+            },
+            "fontSize": {
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "700"}],
+                    "body-lg": ["18px", {"lineHeight": "26px", "fontWeight": "400"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "500"}],
+                    "data-viz": ["14px", {"lineHeight": "18px", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .pulse-error {
+            box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4);
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(186, 26, 26, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(186, 26, 26, 0); }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="bg-surface/80 backdrop-blur-md shadow-sm fixed top-0 w-full z-50 h-16 flex justify-between items-center px-margin-mobile">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-full bg-surface-variant overflow-hidden border border-outline-variant/30">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a person with a friendly expression, set against a clean, minimalist studio background. The lighting is soft and high-key, reflecting a modern wellness aesthetic. The individual has a serene look, emphasizing a supportive and clinical yet warm persona, consistent with a high-end healthcare application's branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBocmruQVWzf-9-nIeRWjkIR4G0Ie3ebtiMMvkI-2sa35xZ0serm-uJzpnPz2G-RebXfTcDrwDdj5pYQBzODxFFBHf2xKJbixIia7xzSO2KUcZB3u3EXGzzmnsw_cykhYYTzzQVm5OsocsNOWABD2P-LbxMwwYmeobCuxot5yXPtX8GAm0WaaADRdM0vcxx740lRq5jei6ILWu1hroRAB7ddxdJ2Bc95fTPKfVbxpKxXdrobW78XIdW7xdq-I4Th0XTj7jEl8XRj84"/>
+</div>
+<h1 class="font-headline-sm text-headline-sm text-primary">Gait Analysis</h1>
+</div>
+<button class="text-primary transition-all duration-200 active:scale-95 hover:opacity-80">
+<span class="material-symbols-outlined">sensors</span>
+</button>
+</header>
+<main class="pt-24 px-margin-mobile flex flex-col items-center">
+<!-- Header Text -->
+<div class="text-center mb-xl">
+<h2 class="font-headline-md text-headline-md text-on-surface">Recording: Right Foot</h2>
+<p class="font-body-md text-on-surface-variant mt-xs">Keep walking naturally until the timer ends.</p>
+</div>
+<!-- Timer Section -->
+<div class="relative flex items-center justify-center w-64 h-64 mb-xl">
+<!-- Progress Ring Background -->
+<svg class="absolute w-full h-full" viewbox="0 0 100 100">
+<circle class="text-surface-container-highest" cx="50" cy="50" fill="transparent" r="44" stroke="currentColor" stroke-width="6"></circle>
+<circle class="text-primary-container progress-ring__circle" cx="50" cy="50" fill="transparent" r="44" stroke="currentColor" stroke-dasharray="276.46" stroke-dashoffset="180" stroke-linecap="round" stroke-width="6"></circle>
+</svg>
+<div class="text-center z-10">
+<span class="font-display-lg text-[64px] leading-none text-primary">00:22</span>
+<p class="font-label-md text-on-surface-variant mt-base">SECONDS REMAINING</p>
+</div>
+</div>
+<!-- Sensor Status Grid (Bento Style) -->
+<div class="grid grid-cols-2 gap-md w-full mb-xl">
+<div class="col-span-1 bg-surface-container-lowest p-md rounded-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] border border-outline-variant/10">
+<div class="flex items-center gap-base mb-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">directions_run</span>
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Accelerometer</span>
+</div>
+<p class="font-headline-sm text-primary">Active</p>
+</div>
+<div class="col-span-1 bg-surface-container-lowest p-md rounded-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] border border-outline-variant/10">
+<div class="flex items-center gap-base mb-xs text-primary">
+<span class="material-symbols-outlined text-[20px]">explore</span>
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Gyroscope</span>
+</div>
+<p class="font-headline-sm text-primary">Active</p>
+</div>
+<div class="col-span-2 bg-surface-container-lowest p-md rounded-lg shadow-[0_4px_20px_0_rgba(29,53,87,0.06)] border border-outline-variant/10">
+<div class="flex justify-between items-center mb-sm">
+<div class="flex items-center gap-base text-primary">
+<span class="material-symbols-outlined text-[20px]">speed</span>
+<span class="font-label-sm uppercase tracking-wider text-on-surface-variant">Sampling Rate: Stable</span>
+</div>
+<span class="font-data-viz text-primary">120 Hz</span>
+</div>
+<!-- Real-time Preview Mockup -->
+<div class="h-12 w-full flex items-end gap-[2px]">
+<div class="bg-primary-container/40 flex-1 h-[40%] rounded-t-xs"></div>
+<div class="bg-primary-container/60 flex-1 h-[60%] rounded-t-xs"></div>
+<div class="bg-primary-container flex-1 h-[80%] rounded-t-xs"></div>
+<div class="bg-primary-container/80 flex-1 h-[50%] rounded-t-xs"></div>
+<div class="bg-primary-container flex-1 h-[90%] rounded-t-xs"></div>
+<div class="bg-primary-container/60 flex-1 h-[70%] rounded-t-xs"></div>
+<div class="bg-primary-container flex-1 h-[40%] rounded-t-xs"></div>
+<div class="bg-primary-container/40 flex-1 h-[60%] rounded-t-xs"></div>
+<div class="bg-primary-container/20 flex-1 h-[30%] rounded-t-xs"></div>
+<div class="bg-primary-container/50 flex-1 h-[55%] rounded-t-xs"></div>
+<div class="bg-primary-container flex-1 h-[85%] rounded-t-xs"></div>
+<div class="bg-primary-container/70 flex-1 h-[65%] rounded-t-xs"></div>
+</div>
+</div>
+</div>
+<!-- Stop Action -->
+<div class="flex flex-col items-center gap-lg w-full">
+<button class="w-24 h-24 rounded-full bg-error text-on-error flex items-center justify-center pulse-error transition-all duration-300 active:scale-90 shadow-lg">
+<span class="material-symbols-outlined text-[40px]" style="font-variation-settings: 'FILL' 1;">stop</span>
+</button>
+<!-- Safety Note Card -->
+<div class="bg-surface-container-high/50 p-md rounded-lg flex items-start gap-md w-full border-l-4 border-tertiary-container">
+<span class="material-symbols-outlined text-tertiary">info</span>
+<p class="font-label-md text-on-surface-variant">Make sure the phone stays attached during recording.</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center pt-2 pb-6 px-4 bg-surface/90 backdrop-blur-md border-t border-outline-variant/30 z-50 shadow-[0_-4px_20px_0_rgba(29,53,87,0.06)] rounded-t-lg">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 p-2" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label-sm text-label-sm">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-2xl px-4 py-1 transition-transform duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fiber_manual_record</span>
+<span class="font-label-sm text-label-sm">Record</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 p-2" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-sm text-label-sm">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-transform duration-300 active:scale-90 p-2" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-sm text-label-sm">Profile</span>
+</a>
+</nav>
+</body></html>

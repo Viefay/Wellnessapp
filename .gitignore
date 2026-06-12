@@ -1,6 +1,28 @@
-﻿env/
+﻿# Python
+env/
+venv/
 __pycache__/
 *.pyc
 .ipynb_checkpoints/
+
+# Flutter / Dart
+.dart_tool/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+
+# Android
+android/.gradle/
+android/local.properties
+
+# Node
+node_modules/
+dist/
+
+# IDE / OS
 .vscode/
+.idea/workspace.xml
 .DS_Store
+Thumbs.db

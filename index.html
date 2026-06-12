@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Wellness App - Gait Analysis</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface-variant": "#3c4947",
+            "secondary": "#485f84",
+            "surface-dim": "#d5dbd9",
+            "on-error": "#ffffff",
+            "on-primary-container": "#004c46",
+            "on-primary": "#ffffff",
+            "tertiary-container": "#ff9468",
+            "outline": "#6c7a77",
+            "on-primary-fixed": "#00201d",
+            "inverse-primary": "#4fdbcc",
+            "surface-container-highest": "#dde4e2",
+            "surface-container": "#e9efed",
+            "on-surface": "#161d1c",
+            "on-secondary": "#ffffff",
+            "tertiary-fixed-dim": "#ffb599",
+            "surface": "#f4fbf8",
+            "surface-tint": "#006a62",
+            "inverse-surface": "#2b3230",
+            "on-secondary-container": "#445a7f",
+            "on-tertiary-fixed": "#370e00",
+            "tertiary": "#9a4520",
+            "surface-variant": "#dde4e2",
+            "outline-variant": "#bbcac6",
+            "primary": "#006a62",
+            "surface-container-lowest": "#ffffff",
+            "on-background": "#161d1c",
+            "on-primary-fixed-variant": "#005049",
+            "on-secondary-fixed": "#001b3c",
+            "surface-bright": "#f4fbf8",
+            "tertiary-fixed": "#ffdbce",
+            "primary-container": "#2ec4b6",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#7b2f0a",
+            "on-tertiary": "#ffffff",
+            "error": "#ba1a1a",
+            "primary-fixed": "#70f8e8",
+            "surface-container-low": "#eff5f3",
+            "inverse-on-surface": "#ecf2f0",
+            "on-error-container": "#93000a",
+            "surface-container-high": "#e3eae7",
+            "secondary-fixed-dim": "#b0c7f1",
+            "secondary-fixed": "#d5e3ff",
+            "secondary-container": "#bbd3fd",
+            "primary-fixed-dim": "#4fdbcc",
+            "on-secondary-fixed-variant": "#30476a",
+            "on-tertiary-container": "#762b06",
+            "background": "#f4fbf8"
+          },
+          borderRadius: {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "xs": "4px",
+            "xl": "32px",
+            "lg": "24px",
+            "base": "8px",
+            "sm": "12px",
+            "margin-mobile": "20px",
+            "md": "16px",
+            "gutter-mobile": "16px"
+          },
+          fontFamily: {
+            "display-lg": ["Nunito Sans"],
+            "headline-sm": ["Nunito Sans"],
+            "body-lg": ["Nunito Sans"],
+            "label-md": ["Inter"],
+            "label-sm": ["Inter"],
+            "data-viz": ["Inter"],
+            "headline-md": ["Nunito Sans"],
+            "body-md": ["Nunito Sans"]
+          },
+          fontSize: {
+            "display-lg": ["32px", { lineHeight: "40px", letterSpacing: "-0.02em", fontWeight: "800" }],
+            "headline-sm": ["20px", { lineHeight: "28px", fontWeight: "700" }],
+            "body-lg": ["18px", { lineHeight: "26px", fontWeight: "400" }],
+            "label-md": ["14px", { lineHeight: "20px", letterSpacing: "0.01em", fontWeight: "600" }],
+            "label-sm": ["12px", { lineHeight: "16px", fontWeight: "500" }],
+            "data-viz": ["14px", { lineHeight: "18px", fontWeight: "700" }],
+            "headline-md": ["24px", { lineHeight: "32px", fontWeight: "700" }],
+            "body-md": ["16px", { lineHeight: "24px", fontWeight: "400" }]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      min-height: max(884px, 100dvh);
+      background-color: #f4fbf8;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .bg-teal-gradient {
+      background: linear-gradient(135deg, #2ec4b6 0%, #006a62 100%);
+    }
+    .glass-background {
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .glass-nav {
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .custom-shadow {
+      box-shadow: 0 4px 20px 0 rgba(29, 53, 87, 0.06);
+    }
+    .progress-ring__circle {
+      transition: stroke-dashoffset 1s linear;
+      transform: rotate(-90deg);
+      transform-origin: 50% 50%;
+    }
+    .pulse-error {
+      box-shadow: 0 0 0 0 rgba(186, 26, 26, 0.4);
+      animation: pulse-red 2s infinite;
+    }
+    @keyframes pulse-red {
+      0%   { transform: scale(1);    box-shadow: 0 0 0 0   rgba(186,26,26,0.4); }
+      70%  { transform: scale(1.05); box-shadow: 0 0 0 15px rgba(186,26,26,0);   }
+      100% { transform: scale(1);    box-shadow: 0 0 0 0   rgba(186,26,26,0);   }
+    }
+    .wave-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      height: 60px;
+    }
+    .wave-bar {
+      width: 4px;
+      background-color: #006a62;
+      border-radius: 2px;
+      animation: pulse-wave 1.2s ease-in-out infinite;
+    }
+    @keyframes pulse-wave {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.3); }
+      50%       { opacity: 1;   transform: scaleY(1);   }
+    }
+    .radar-grid { stroke: #bbcac6; stroke-width: 1; fill: none; }
+    .radar-area { fill: rgba(46,196,182,0.2); stroke: #006a62; stroke-width: 2.5; }
+    .radar-point { fill: #006a62; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    #app { min-height: 100dvh; }
+  </style>
+</head>
+<body class="text-on-surface font-body-md">
+  <div id="app"></div>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

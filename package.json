@@ -1,0 +1,13 @@
+{
+  "name": "zela-wellness-app",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Wellness App — gait analysis frontend SPA",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "start": "npx serve ."
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
